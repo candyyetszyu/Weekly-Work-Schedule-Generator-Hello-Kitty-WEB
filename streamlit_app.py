@@ -267,9 +267,13 @@ def main():
         with st.expander("🚀 Quick Start Guide", expanded=False):
             st.markdown("""
             **1. Choose Mode**: Select between weekly or total hours
+            
             **2. Set Date**: Pick your start date
+            
             **3. Enter Hours**: Specify your work hours
+            
             **4. Choose Format**: Select export options
+            
             **5. Generate**: Click the magic button!
             """)
     
