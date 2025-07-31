@@ -1,279 +1,186 @@
-# 🎀 Weekly Work Schedule Generator - Hello Kitty Edition 🌸
+# Weekly-Work-Schedule-Generator-Hello-Kitty-WEB
 
-A magical and adorable schedule generator that creates personalized work schedules with a beautiful Hello Kitty theme! This application helps you generate weekly work schedules with customizable hours, time slots, and multiple export formats.
+🎀 **Hello Kitty Schedule Generator - Web Edition** 🎀
 
-## ✨ Features
+A beautiful, modern web application for generating weekly work schedules with a delightful Hello Kitty theme. Converted from Tkinter GUI to Streamlit for easy web deployment and access.
 
-### 🎯 Core Functionality
-- **Two Generation Modes**:
-  - **Mode 1**: Weekly hours + total days
-  - **Mode 2**: Total overall hours (automatically calculates weeks needed)
-- **Smart Time Distribution**: Automatically splits hours across days and weeks
-- **30-Minute Units**: All calculations use 30-minute increments for precision
-- **Time Constraints**: 
-  - Maximum 15 hours per week
-  - 30-120 minutes per day
-  - Work hours: 09:00-18:00
+![Hello Kitty](https://img.shields.io/badge/Hello-Kitty-Pink?style=for-the-badge&logo=heart&color=ff69b4)
+![Streamlit](https://img.shields.io/badge/Streamlit-Web%20App-ff4b4b?style=for-the-badge&logo=streamlit)
+![Python](https://img.shields.io/badge/Python-3.8+-blue?style=for-the-badge&logo=python)
 
-### 🎨 Beautiful Hello Kitty GUI
-- **Adorable Pink Theme**: Complete Hello Kitty styling with pink color palette
-- **Background Image**: Custom Hello Kitty background with hearts and stars
-- **User-Friendly Interface**: Easy-to-use form with clear sections
-- **Real-time Validation**: Input validation with helpful error messages
-- **Progress Indicators**: Visual feedback during schedule generation
+## ✨ Live Demo
 
-### 📁 Multiple Export Formats
-- **Text (.txt)**: Simple text format for easy reading
-- **Excel (.xlsx)**: Structured spreadsheet with formatting
-- **Word (.docx)**: Professional table format with weekly summaries
+🌐 **Try it online**: [Hello Kitty Schedule Generator](https://candyyetszyu.streamlit.app/Weekly-Work-Schedule-Generator-Hello-Kitty-WEB)
 
-### 🚀 Dual Interface Options
-- **GUI Version**: Beautiful Hello Kitty themed graphical interface
-- **CLI Version**: Command-line interface for quick automation
+## 🎯 Features
 
-## 🛠️ Installation
-
-### Prerequisites
-- Python 3.7 or higher
-- pip (Python package installer)
-
-### Required Packages
-```bash
-pip install pandas openpyxl python-docx Pillow
-```
-
-### Quick Setup
-1. Clone the repository:
-```bash
-git clone https://github.com/candyyetszyu/Weekly-Work-Schedule-Generator-Hello-Kitty.git
-cd Weekly-Work-Schedule-Generator-Hello-Kitty
-```
-
-2. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
+- 🌸 **Beautiful Hello Kitty Theme**: Pink gradients and cute styling throughout
+- 🎀 **Two Generation Modes**: 
+  - **Mode 1**: Input total weekly hours and days
+  - **Mode 2**: Input total overall hours (auto-distributed across weeks)
+- 📄 **Multiple Export Formats**: Text, Excel, and Word documents
+- 🌐 **Web-Based Interface**: Access from any browser, anywhere
+- 📱 **Responsive Design**: Works perfectly on desktop and mobile devices
+- ⬇️ **Direct Downloads**: Download generated files directly from the web app
+- 🎨 **Interactive Preview**: Preview your schedule before downloading
 
 ## 🚀 Quick Start
 
-### Option 1: Launcher (Recommended)
-```bash
-python3 launcher.py
-```
-Choose between GUI and CLI versions from the menu.
+### Local Development
 
-### Option 2: Direct GUI Launch
-```bash
-python3 schedule_gui.py
-```
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/candyyetszyu/Weekly-Work-Schedule-Generator-Hello-Kitty-WEB.git
+   cd Weekly-Work-Schedule-Generator-Hello-Kitty-WEB
+   ```
 
-### Option 3: Direct CLI Launch
-```bash
-python3 generate_schedule_cli_copy.py
-```
+2. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-## 📖 Usage Guide
+3. **Run the web app**
+   ```bash
+   streamlit run streamlit_app.py
+   ```
 
-### GUI Interface
+4. **Open your browser**
+   Navigate to `http://localhost:8501`
 
-#### 🎀 Hello Kitty GUI Features
-- **Mode Selection**: Choose between weekly hours or total hours mode
-- **Input Fields**: 
-  - Start Date (YYYY-MM-DD format)
-  - Starting Week Number
-  - Total Hours (Mode 2) or Weekly Hours + Days (Mode 1)
-- **Output Settings**:
-  - Custom filename
-  - Export format selection (TXT, XLSX, DOCX)
-  - Browse button for save location
-- **Action Buttons**:
-  - Generate Magic Schedule
-  - Clear Form
-  - Exit
+## 🎯 How to Use
 
-#### 🌸 GUI Styling
-- **Color Palette**: Pink theme (#ff69b4, #ff1493, #c71585, #ffb6c1)
-- **Font**: Comic Sans MS for that cute Hello Kitty feel
-- **Background**: Custom Hello Kitty image with decorative elements
-- **Icons**: Emojis throughout the interface (🌸, 🎀, ✨)
+1. **Choose Your Mode**:
+   - **Mode 1**: Specify weekly hours and total number of days
+   - **Mode 2**: Specify total overall hours (system auto-distributes)
 
-### CLI Interface
+2. **Set Parameters**:
+   - Start date (YYYY-MM-DD format)
+   - Starting week number
+   - Hours (weekly or total overall)
+   - Days (for Mode 1 only)
 
-#### Mode 1: Weekly Hours + Days
-```bash
-Enter mode (1 for weekly hours + days, 2 for total overall hours): 1
-Enter start date (YYYY-MM-DD): 2024-01-01
-Enter weekly hours: 10
-Enter total days: 7
-Enter starting week number: 1
-Enter output filename: my_schedule
-```
+3. **Configure Output**:
+   - Choose your filename
+   - Select export formats (Text, Excel, Word)
 
-#### Mode 2: Total Overall Hours
-```bash
-Enter mode (1 for weekly hours + days, 2 for total overall hours): 2
-Enter start date (YYYY-MM-DD): 2024-01-01
-Enter total overall hours: 25
-Enter starting week number: 1
-Enter output filename: my_schedule
-```
+4. **Generate & Download**:
+   - Click "Generate Magic Schedule"
+   - Use download buttons to get your files
 
 ## 📊 Output Formats
 
-### Text (.txt) Format
-```
-Week 1 (January 1 - January 7)
-Monday, January 1: 1h 30m | 09:00-10:30
-Tuesday, January 2: 1h 30m | 14:00-15:30
-Wednesday, January 3: 1h 30m | 10:00-11:30
-...
-Total work time: 10.00 hours
-```
+The app generates three types of files:
 
-### Excel (.xlsx) Format
-- **Sheet 1**: Daily schedule with columns for Date, Day, Time, Hours
-- **Sheet 2**: Weekly summary with total hours per week
-- **Formatting**: Clean table layout with borders and headers
+| Format | Description | Use Case |
+|--------|-------------|----------|
+| 📄 **Text (.txt)** | Human-readable schedule format | Quick reference, printing |
+| 📊 **Excel (.xlsx)** | Structured data in spreadsheet | Data analysis, further editing |
+| 📝 **Word (.docx)** | Formatted table in Word document | Professional reports, sharing |
 
-### Word (.docx) Format
-- **Table Structure**: 
-  - Week column
-  - Date column (with daily dates on new lines)
-  - Schedule column (with daily times on new lines)
-  - Hours column (with daily hours on new lines)
-- **Professional Layout**: Formatted table with proper spacing
-- **Summary**: Total work time at the bottom
+## 🌐 Deployment
 
-## ⚙️ Configuration
+### Streamlit Cloud (Recommended)
 
-### Time Constraints
-- **Maximum Weekly Hours**: 15 hours
-- **Daily Time Range**: 30-120 minutes
-- **Work Hours**: 09:00-18:00
-- **Time Unit**: 30-minute increments
+1. **Fork this repository** or push to your own GitHub repo
+2. **Go to [Streamlit Cloud](https://share.streamlit.io)**
+3. **Sign in with GitHub**
+4. **Click "New app"**
+5. **Configure**:
+   - **Repository**: Your GitHub repo
+   - **Main file path**: `streamlit_app.py`
+   - **App URL**: Choose your custom URL
+6. **Click "Deploy"**
 
-### File Locations
-- **Default Save Location**: Current directory
-- **Custom Location**: Use browse button in GUI or specify path in CLI
-- **File Naming**: Customizable filename with automatic format extensions
+Your app will be live at: `https://yourusername.streamlit.app/your-app-name`
+
+### Other Deployment Options
+
+- **Heroku**: Use the provided `Procfile` and `setup.sh`
+- **Docker**: Build with the included `Dockerfile`
+- **Local Server**: Run with `streamlit run streamlit_app.py --server.port 8080`
 
 ## 🎨 Customization
 
-### Hello Kitty Theme
-The GUI uses a custom Hello Kitty theme with:
-- **Background Image**: `hello_kitty_bg.png` (generated programmatically)
-- **Color Scheme**: Various shades of pink
-- **Font**: Comic Sans MS for that cute aesthetic
-- **Icons**: Emojis and decorative elements
+### Theme Colors
 
-### Background Image
-The Hello Kitty background is generated using `create_hello_kitty_bg.py`:
-- **Size**: 800x900 pixels
-- **Elements**: Hello Kitty face, bow, whiskers, hearts, stars
-- **Colors**: Pink background with white and pink Hello Kitty elements
+The app uses a Hello Kitty pink theme:
+
+```css
+Primary Pink: #ff69b4
+Deep Pink: #ff1493
+Light Pink: #ffe6f2
+Card Background: #fff8fa
+```
+
+### Adding Hello Kitty Images
+
+Place a `hello_kitty.png` or `hello_kitty.jpg` file in the project directory to display the Hello Kitty image in the sidebar.
 
 ## 📁 Project Structure
 
 ```
-Weekly-Work-Schedule-Generator-Hello-Kitty/
-├── generate_schedule_cli_copy.py    # Core schedule generation logic
-├── schedule_gui.py                  # Hello Kitty themed GUI
-├── launcher.py                      # Interface launcher
-├── create_hello_kitty_bg.py        # Background image generator
-├── hello_kitty_bg.png              # Hello Kitty background image
-├── README.md                        # This documentation
-├── .gitignore                       # Git ignore rules
-└── requirements.txt                 # Python dependencies
+├── streamlit_app.py              # Main Streamlit web application
+├── generate_schedule_cli_copy.py # Core schedule generation logic
+├── requirements.txt              # Python dependencies
+├── deploy.sh                     # Deployment helper script
+├── hello_kitty.png              # Hello Kitty image (optional)
+├── README.md                     # This file
+└── schedule_gui.py              # Original Tkinter GUI (reference)
 ```
 
 ## 🔧 Technical Details
 
-### Core Functions
-- `generate_schedule()`: Main schedule generation logic
-- `generate_schedule_total_hours()`: Mode 2 implementation
-- `split_weekly_minutes()`: Time distribution algorithm
-- `generate_random_time_slots()`: Random time slot generation
+### Dependencies
 
-### GUI Components
-- `ScheduleGeneratorGUI`: Main GUI class
-- `setup_background()`: Background image loading
-- `setup_styles()`: Hello Kitty theme configuration
-- `create_widgets()`: Interface layout creation
+- **Streamlit**: Web framework
+- **Pandas**: Data manipulation
+- **OpenPyXL**: Excel file generation
+- **python-docx**: Word document creation
+- **Pillow**: Image processing
 
-### Export Functions
-- **Text Export**: Simple string formatting
-- **Excel Export**: Using pandas and openpyxl
-- **Word Export**: Using python-docx with table formatting
+### Schedule Generation Logic
 
-## 🐛 Troubleshooting
+- **Time slots**: 30-minute increments between 09:00-18:00
+- **Daily work**: 30-120 minutes per day
+- **Weekly limit**: Maximum 15 hours per week
+- **Random distribution**: Ensures varied and realistic schedules
 
-### Common Issues
+## 🌟 Features Comparison
 
-#### GUI Not Starting
-```bash
-# Check Python version
-python3 --version
-
-# Install missing dependencies
-pip install pandas openpyxl python-docx Pillow
-
-# Check file permissions
-chmod +x schedule_gui.py
-```
-
-#### Background Image Not Loading
-- Ensure `hello_kitty_bg.png` exists in the project directory
-- Run `python3 create_hello_kitty_bg.py` to regenerate the image
-- Check PIL/Pillow installation
-
-#### Export Errors
-- Ensure all required packages are installed
-- Check write permissions in the target directory
-- Verify filename doesn't contain invalid characters
-
-### Error Messages
-- **"Total overall hours must be at least 0.5 hours"**: Increase the minimum hours
-- **"Invalid date format"**: Use YYYY-MM-DD format
-- **"File not found"**: Check file paths and permissions
+| Feature | Tkinter GUI | Streamlit Web App |
+|---------|-------------|-------------------|
+| Platform | Desktop only | Web (any device) |
+| Installation | Local Python | Browser access |
+| Deployment | Manual | Streamlit Cloud |
+| Sharing | File sharing | URL sharing |
+| Updates | Manual | Automatic |
+| Mobile | No | Yes |
+| Theme | Hello Kitty | Hello Kitty |
 
 ## 🤝 Contributing
 
-We welcome contributions to make the Hello Kitty Schedule Generator even more magical!
+1. **Fork the repository**
+2. **Create a feature branch**: `git checkout -b feature/amazing-feature`
+3. **Commit your changes**: `git commit -m 'Add amazing feature'`
+4. **Push to the branch**: `git push origin feature/amazing-feature`
+5. **Open a Pull Request**
 
-### How to Contribute
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+## 📝 License
 
-### Development Setup
-```bash
-git clone https://github.com/candyyetszyu/Weekly-Work-Schedule-Generator-Hello-Kitty.git
-cd Weekly-Work-Schedule-Generator-Hello-Kitty
-pip install -r requirements.txt
-```
-
-## 📄 License
-
-This project is open source and available under the MIT License.
+This project is open source and available under the [MIT License](LICENSE).
 
 ## 🙏 Acknowledgments
 
-- **Hello Kitty**: For the adorable inspiration and theme
-- **Python Community**: For the amazing libraries and tools
-- **Open Source Contributors**: For making this project possible
+- **Hello Kitty**: For the adorable theme inspiration
+- **Streamlit**: For the amazing web framework
+- **Sanrio**: For the Hello Kitty character
 
-## 📞 Support
+## 🎀 Support
 
-If you encounter any issues or have questions:
-1. Check the troubleshooting section above
-2. Review the error messages carefully
-3. Ensure all dependencies are installed
-4. Try both GUI and CLI versions
+If you love this project, please give it a ⭐ star on GitHub!
 
 ---
 
-**Made with ❤️ and lots of 🌸 Hello Kitty magic! 🎀✨**
+**Made with ❤️ and Hello Kitty magic ✨**
 
-*Enjoy creating your magical work schedules!*
+*Happy scheduling with Hello Kitty! 🎀* 
