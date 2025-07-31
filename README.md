@@ -10,7 +10,7 @@ A beautiful, modern web application for generating weekly work schedules with a 
 
 ## ✨ Live Demo
 
-🌐 **Try it online**: [Hello Kitty Schedule Generator](https://candyyetszyu.streamlit.app/Weekly-Work-Schedule-Generator-Hello-Kitty-WEB)
+🌐 **Try it online**: [Hello Kitty Schedule Generator](https://weekly-work-schedule-generator-hello-kitty-web-47p6emozjejiyx3.streamlit.app/)
 
 ## 🎯 Features
 
