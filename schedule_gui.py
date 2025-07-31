@@ -386,9 +386,9 @@ class ScheduleGeneratorGUI:
         generate_btn = tk.Button(button_frame, text="🌸 Generate Magic Schedule 🌸", 
                                 command=self.generate_schedule,
                                 font=("Comic Sans MS", 11, "bold"),
-                                bg='#ff69b4',  # Hot pink - unique magic color
+                                bg='#ff1493',  # Deep pink - very distinct magic color
                                 fg='white',
-                                activebackground='#ff1493',  # Deep pink when pressed
+                                activebackground='#dc143c',  # Crimson when pressed
                                 activeforeground='white',
                                 relief='raised',
                                 bd=3,
@@ -397,14 +397,14 @@ class ScheduleGeneratorGUI:
                                 cursor='hand2')
         generate_btn.pack(side=tk.LEFT, padx=(0, 12))
         
-        # Clear button - soft lavender theme
+        # Clear button - soft mint theme
         clear_btn = tk.Button(button_frame, text="🎀 Clear Form", 
                              command=self.clear_form,
                              font=("Comic Sans MS", 10),
-                             bg='#e6e6fa',  # Lavender
-                             fg='#4b0082',  # Indigo text
-                             activebackground='#d8d8f0',
-                             activeforeground='#4b0082',
+                             bg='#98fb98',  # Pale green
+                             fg='#006400',  # Dark green text
+                             activebackground='#90ee90',
+                             activeforeground='#006400',
                              relief='raised',
                              bd=2,
                              padx=18,
@@ -412,14 +412,14 @@ class ScheduleGeneratorGUI:
                              cursor='hand2')
         clear_btn.pack(side=tk.LEFT, padx=(0, 12))
         
-        # Exit button - soft peach theme
+        # Exit button - soft sky blue theme
         exit_btn = tk.Button(button_frame, text="🌸 Exit", 
                             command=self.root.quit,
                             font=("Comic Sans MS", 10),
-                            bg='#ffdab9',  # Peach
-                            fg='#8b4513',  # Saddle brown text
-                            activebackground='#ffcda1',
-                            activeforeground='#8b4513',
+                            bg='#87ceeb',  # Sky blue
+                            fg='#000080',  # Navy blue text
+                            activebackground='#87cefa',
+                            activeforeground='#000080',
                             relief='raised',
                             bd=2,
                             padx=18,
