@@ -457,6 +457,42 @@ def main():
                 if 'last_filename' in st.session_state:
                     del st.session_state['last_filename']
                 st.rerun()
+            
+            # Download buttons for all formats
+        st.markdown("### ⬇️ Download Your Hello Kitty Schedule")
+
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+            if os.path.exists(f"{filename}.txt"):
+                with open(f"{filename}.txt", "r") as f:
+                    st.download_button(
+                        label="🌸 Download TXT",
+                        data=f.read(),
+                        file_name=f"{filename}.txt",
+                        mime="text/plain",
+                        help="Download as plain text"
+                    )
+        with col2:
+            if os.path.exists(f"{filename}.xlsx"):
+                with open(f"{filename}.xlsx", "rb") as f:
+                    st.download_button(
+                        label="🎀 Download XLSX",
+                        data=f.read(),
+                        file_name=f"{filename}.xlsx",
+                        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                        help="Download as Excel"
+                    )
+        with col3:
+            if os.path.exists(f"{filename}.docx"):
+                with open(f"{filename}.docx", "rb") as f:
+                    st.download_button(
+                        label="💖 Download DOCX",
+                        data=f.read(),
+                        file_name=f"{filename}.docx",
+                        mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                        help="Download as Word"
+                    )
     
     with tab3:
         st.markdown("""
