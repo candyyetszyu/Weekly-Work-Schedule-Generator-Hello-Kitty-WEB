@@ -104,6 +104,10 @@ dmypy.json
 *.xlsx
 *.docx
 
+# Keep important text files
+!requirements.txt
+!README.md
+
 # Background images (keep them in repo)
 # hello_kitty_bg.png
 

@@ -1,15 +1,58 @@
-# 🗓 Weekly Work Schedule Generator
+# 🎀 Weekly Work Schedule Generator - Hello Kitty Edition 🌸
 
-A powerful tool to generate personalized work schedules with flexible time management and multiple export formats.
+A magical and adorable schedule generator that creates personalized work schedules with a beautiful Hello Kitty theme! This application helps you generate weekly work schedules with customizable hours, time slots, and multiple export formats.
 
 ## ✨ Features
 
-- **Two Modes**: Weekly hours or total overall hours
-- **Smart Time Distribution**: 30-minute increments between 09:00-18:00
-- **Multiple Export Formats**: .txt, .xlsx, and .docx with table format
-- **User-Friendly Interface**: Both GUI and CLI versions available
-- **Flexible Scheduling**: 30-120 minutes per day, max 15 hours per week
-- **Professional Output**: Clean, organized schedules ready for use
+### 🎯 Core Functionality
+- **Two Generation Modes**:
+  - **Mode 1**: Weekly hours + total days
+  - **Mode 2**: Total overall hours (automatically calculates weeks needed)
+- **Smart Time Distribution**: Automatically splits hours across days and weeks
+- **30-Minute Units**: All calculations use 30-minute increments for precision
+- **Time Constraints**: 
+  - Maximum 15 hours per week
+  - 30-120 minutes per day
+  - Work hours: 09:00-18:00
+
+### 🎨 Beautiful Hello Kitty GUI
+- **Adorable Pink Theme**: Complete Hello Kitty styling with pink color palette
+- **Background Image**: Custom Hello Kitty background with hearts and stars
+- **User-Friendly Interface**: Easy-to-use form with clear sections
+- **Real-time Validation**: Input validation with helpful error messages
+- **Progress Indicators**: Visual feedback during schedule generation
+
+### 📁 Multiple Export Formats
+- **Text (.txt)**: Simple text format for easy reading
+- **Excel (.xlsx)**: Structured spreadsheet with formatting
+- **Word (.docx)**: Professional table format with weekly summaries
+
+### 🚀 Dual Interface Options
+- **GUI Version**: Beautiful Hello Kitty themed graphical interface
+- **CLI Version**: Command-line interface for quick automation
+
+## 🛠️ Installation
+
+### Prerequisites
+- Python 3.7 or higher
+- pip (Python package installer)
+
+### Required Packages
+```bash
+pip install pandas openpyxl python-docx Pillow
+```
+
+### Quick Setup
+1. Clone the repository:
+```bash
+git clone https://github.com/candyyetszyu/Weekly-Work-Schedule-Generator-Hello-Kitty.git
+cd Weekly-Work-Schedule-Generator-Hello-Kitty
+```
+
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
 
 ## 🚀 Quick Start
 
@@ -17,169 +60,220 @@ A powerful tool to generate personalized work schedules with flexible time manag
 ```bash
 python3 launcher.py
 ```
-Choose between GUI and CLI interfaces.
+Choose between GUI and CLI versions from the menu.
 
-### Option 2: Direct Launch
+### Option 2: Direct GUI Launch
 ```bash
-# GUI Version
 python3 schedule_gui.py
-
-# CLI Version
-python3 generate_schedule_cli_copy.py
 ```
 
-## 📋 Requirements
-
-- Python 3.6+
-- Required packages:
-  - `pandas` (for Excel export)
-  - `python-docx` (for Word export)
-  - `tkinter` (for GUI - usually included with Python)
-
-### Install Dependencies
-```bash
-pip3 install pandas python-docx
-```
-
-## 🖥️ GUI Interface
-
-The GUI provides an intuitive way to create schedules:
-
-### Mode Selection
-- **Mode 1**: Input total weekly hours + number of days
-- **Mode 2**: Input total overall hours (auto-distributed across weeks)
-
-### Schedule Parameters
-- **Start Date**: Any date within the starting week (YYYY-MM-DD)
-- **Starting Week**: Week number to begin with
-- **Total Hours**: Weekly hours (Mode 1) or overall hours (Mode 2)
-- **Total Days**: Number of days to generate (Mode 1 only)
-
-### Output Settings
-- **Filename**: Choose your output filename
-- **Export Options**: Select which formats to generate (.txt, .xlsx, .docx)
-
-### Features
-- ✅ Input validation
-- ✅ Progress indication
-- ✅ File browser for save location
-- ✅ Clear form functionality
-- ✅ Status updates
-
-## 💻 CLI Interface
-
-The command-line interface provides the same functionality:
-
+### Option 3: Direct CLI Launch
 ```bash
 python3 generate_schedule_cli_copy.py
 ```
 
-Follow the prompts to:
-1. Choose mode (1 or 2)
-2. Enter start date
-3. Enter starting week number
-4. Enter filename
-5. Enter hours and days (if applicable)
+## 📖 Usage Guide
+
+### GUI Interface
+
+#### 🎀 Hello Kitty GUI Features
+- **Mode Selection**: Choose between weekly hours or total hours mode
+- **Input Fields**: 
+  - Start Date (YYYY-MM-DD format)
+  - Starting Week Number
+  - Total Hours (Mode 2) or Weekly Hours + Days (Mode 1)
+- **Output Settings**:
+  - Custom filename
+  - Export format selection (TXT, XLSX, DOCX)
+  - Browse button for save location
+- **Action Buttons**:
+  - Generate Magic Schedule
+  - Clear Form
+  - Exit
+
+#### 🌸 GUI Styling
+- **Color Palette**: Pink theme (#ff69b4, #ff1493, #c71585, #ffb6c1)
+- **Font**: Comic Sans MS for that cute Hello Kitty feel
+- **Background**: Custom Hello Kitty image with decorative elements
+- **Icons**: Emojis throughout the interface (🌸, 🎀, ✨)
+
+### CLI Interface
+
+#### Mode 1: Weekly Hours + Days
+```bash
+Enter mode (1 for weekly hours + days, 2 for total overall hours): 1
+Enter start date (YYYY-MM-DD): 2024-01-01
+Enter weekly hours: 10
+Enter total days: 7
+Enter starting week number: 1
+Enter output filename: my_schedule
+```
+
+#### Mode 2: Total Overall Hours
+```bash
+Enter mode (1 for weekly hours + days, 2 for total overall hours): 2
+Enter start date (YYYY-MM-DD): 2024-01-01
+Enter total overall hours: 25
+Enter starting week number: 1
+Enter output filename: my_schedule
+```
 
 ## 📊 Output Formats
 
-### 1. Text File (.txt)
+### Text (.txt) Format
 ```
-Week 1: 15 January – 21 January
-15 Jan 2024 (Monday) - 1h 30m | 12:30–14:00
-16 Jan 2024 (Tuesday) - 1h 0m | 16:00–17:00
+Week 1 (January 1 - January 7)
+Monday, January 1: 1h 30m | 09:00-10:30
+Tuesday, January 2: 1h 30m | 14:00-15:30
+Wednesday, January 3: 1h 30m | 10:00-11:30
 ...
-Total work time: 7.50 hours
+Total work time: 10.00 hours
 ```
 
-### 2. Excel File (.xlsx)
-Professional spreadsheet with columns:
-- Week
-- Date
-- Day
-- Work Time
-- Time Slot
+### Excel (.xlsx) Format
+- **Sheet 1**: Daily schedule with columns for Date, Day, Time, Hours
+- **Sheet 2**: Weekly summary with total hours per week
+- **Formatting**: Clean table layout with borders and headers
 
-### 3. Word Document (.docx)
-Professional table format:
-| Week | Date | Schedule | Hours |
-|------|------|----------|-------|
-| Week 1 | 15 Jan 2024 (Monday)<br>16 Jan 2024 (Tuesday) | 12:30–14:00<br>16:00–17:00 | 1h 30m<br>1h 0m |
+### Word (.docx) Format
+- **Table Structure**: 
+  - Week column
+  - Date column (with daily dates on new lines)
+  - Schedule column (with daily times on new lines)
+  - Hours column (with daily hours on new lines)
+- **Professional Layout**: Formatted table with proper spacing
+- **Summary**: Total work time at the bottom
 
 ## ⚙️ Configuration
 
-### Time Settings
-- **Working Hours**: 09:00 - 18:00
-- **Time Units**: 30-minute increments
-- **Daily Range**: 30-120 minutes per day
-- **Weekly Maximum**: 15 hours per week
+### Time Constraints
+- **Maximum Weekly Hours**: 15 hours
+- **Daily Time Range**: 30-120 minutes
+- **Work Hours**: 09:00-18:00
+- **Time Unit**: 30-minute increments
 
-### Schedule Rules
-- All times rounded to 30-minute units
-- Random time slot assignment within working hours
-- Balanced distribution across available days
-- Automatic adjustment for partial weeks
+### File Locations
+- **Default Save Location**: Current directory
+- **Custom Location**: Use browse button in GUI or specify path in CLI
+- **File Naming**: Customizable filename with automatic format extensions
 
-## 🔧 Customization
+## 🎨 Customization
 
-### Modify Time Settings
-Edit `generate_schedule_cli_copy.py`:
-```python
-# Working hours
-earliest_start = 9 * 60  # 09:00
-latest_start = 18 * 60   # 18:00
+### Hello Kitty Theme
+The GUI uses a custom Hello Kitty theme with:
+- **Background Image**: `hello_kitty_bg.png` (generated programmatically)
+- **Color Scheme**: Various shades of pink
+- **Font**: Comic Sans MS for that cute aesthetic
+- **Icons**: Emojis and decorative elements
 
-# Daily limits
-min_day = 30    # Minimum 30 minutes
-max_day = 120   # Maximum 120 minutes
+### Background Image
+The Hello Kitty background is generated using `create_hello_kitty_bg.py`:
+- **Size**: 800x900 pixels
+- **Elements**: Hello Kitty face, bow, whiskers, hearts, stars
+- **Colors**: Pink background with white and pink Hello Kitty elements
 
-# Time units
-unit = 30       # 30-minute blocks
+## 📁 Project Structure
+
+```
+Weekly-Work-Schedule-Generator-Hello-Kitty/
+├── generate_schedule_cli_copy.py    # Core schedule generation logic
+├── schedule_gui.py                  # Hello Kitty themed GUI
+├── launcher.py                      # Interface launcher
+├── create_hello_kitty_bg.py        # Background image generator
+├── hello_kitty_bg.png              # Hello Kitty background image
+├── README.md                        # This documentation
+├── .gitignore                       # Git ignore rules
+└── requirements.txt                 # Python dependencies
 ```
 
-### Modify Export Formats
-The GUI allows you to select which formats to export:
-- Check/uncheck the export options
-- All formats use the same schedule data
-- Files are saved in the current directory
+## 🔧 Technical Details
+
+### Core Functions
+- `generate_schedule()`: Main schedule generation logic
+- `generate_schedule_total_hours()`: Mode 2 implementation
+- `split_weekly_minutes()`: Time distribution algorithm
+- `generate_random_time_slots()`: Random time slot generation
+
+### GUI Components
+- `ScheduleGeneratorGUI`: Main GUI class
+- `setup_background()`: Background image loading
+- `setup_styles()`: Hello Kitty theme configuration
+- `create_widgets()`: Interface layout creation
+
+### Export Functions
+- **Text Export**: Simple string formatting
+- **Excel Export**: Using pandas and openpyxl
+- **Word Export**: Using python-docx with table formatting
 
 ## 🐛 Troubleshooting
 
 ### Common Issues
 
-1. **Import Error**: Make sure all files are in the same directory
-2. **GUI Not Opening**: Check if tkinter is installed
-3. **Export Errors**: Ensure write permissions in the current directory
-4. **Invalid Date**: Use YYYY-MM-DD format
+#### GUI Not Starting
+```bash
+# Check Python version
+python3 --version
+
+# Install missing dependencies
+pip install pandas openpyxl python-docx Pillow
+
+# Check file permissions
+chmod +x schedule_gui.py
+```
+
+#### Background Image Not Loading
+- Ensure `hello_kitty_bg.png` exists in the project directory
+- Run `python3 create_hello_kitty_bg.py` to regenerate the image
+- Check PIL/Pillow installation
+
+#### Export Errors
+- Ensure all required packages are installed
+- Check write permissions in the target directory
+- Verify filename doesn't contain invalid characters
 
 ### Error Messages
-- "Weekly hours cannot exceed 15" - Reduce your hours input
-- "Total weekly minutes must be at least 30" - Increase your hours input
-- "Duration too long" - The time slot doesn't fit in working hours
-
-## 📁 File Structure
-
-```
-schedule-generator/
-├── generate_schedule_cli_copy.py  # Main CLI application
-├── schedule_gui.py                # GUI interface
-├── launcher.py                    # Launcher script
-└── README.md                      # This file
-```
+- **"Total overall hours must be at least 0.5 hours"**: Increase the minimum hours
+- **"Invalid date format"**: Use YYYY-MM-DD format
+- **"File not found"**: Check file paths and permissions
 
 ## 🤝 Contributing
 
-Feel free to enhance the application:
-- Add new export formats
-- Improve the GUI design
-- Add more scheduling options
-- Optimize the time distribution algorithm
+We welcome contributions to make the Hello Kitty Schedule Generator even more magical!
+
+### How to Contribute
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+### Development Setup
+```bash
+git clone https://github.com/candyyetszyu/Weekly-Work-Schedule-Generator-Hello-Kitty.git
+cd Weekly-Work-Schedule-Generator-Hello-Kitty
+pip install -r requirements.txt
+```
 
 ## 📄 License
 
 This project is open source and available under the MIT License.
 
+## 🙏 Acknowledgments
+
+- **Hello Kitty**: For the adorable inspiration and theme
+- **Python Community**: For the amazing libraries and tools
+- **Open Source Contributors**: For making this project possible
+
+## 📞 Support
+
+If you encounter any issues or have questions:
+1. Check the troubleshooting section above
+2. Review the error messages carefully
+3. Ensure all dependencies are installed
+4. Try both GUI and CLI versions
+
 ---
 
-**Happy Scheduling! 🎉** # Weekly-Work-Schedule-Generator
-# Weekly-Work-Schedule-Generator-Hello-Kitty
+**Made with ❤️ and lots of 🌸 Hello Kitty magic! 🎀✨**
+
+*Enjoy creating your magical work schedules!*
