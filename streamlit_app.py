@@ -20,74 +20,178 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for Hello Kitty theme
+# Custom CSS for Hello Kitty theme with improved UX
 st.markdown("""
 <style>
+    /* Main container styling */
     .main-header {
-        background: linear-gradient(90deg, #ffe6f2 0%, #fff0f5 100%);
-        padding: 1rem;
-        border-radius: 10px;
-        border: 2px solid #ff69b4;
+        background: linear-gradient(135deg, #ffe6f2 0%, #fff0f5 50%, #ffe6f2 100%);
+        padding: 2rem 1.5rem;
+        border-radius: 20px;
+        border: 3px solid #ff69b4;
         margin-bottom: 2rem;
+        box-shadow: 0 8px 32px rgba(255, 105, 180, 0.2);
     }
     
     .card {
-        background: #fff8fa;
+        background: linear-gradient(135deg, #fff8fa 0%, #fff0f5 100%);
         padding: 1.5rem;
-        border-radius: 10px;
+        border-radius: 15px;
         border: 2px solid #ffb6c1;
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 4px 16px rgba(255, 182, 193, 0.15);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 182, 193, 0.25);
     }
     
     .success-message {
-        background: #e8f5e8;
-        padding: 1rem;
-        border-radius: 10px;
+        background: linear-gradient(135deg, #e8f5e8 0%, #f0fff0 100%);
+        padding: 1.5rem;
+        border-radius: 15px;
         border: 2px solid #90ee90;
         margin: 1rem 0;
+        box-shadow: 0 4px 16px rgba(144, 238, 144, 0.2);
     }
     
     .error-message {
-        background: #ffe6e6;
-        padding: 1rem;
-        border-radius: 10px;
+        background: linear-gradient(135deg, #ffe6e6 0%, #fff0f0 100%);
+        padding: 1.5rem;
+        border-radius: 15px;
         border: 2px solid #ff6b6b;
         margin: 1rem 0;
+        box-shadow: 0 4px 16px rgba(255, 107, 107, 0.2);
     }
     
+    /* Button styling */
     .stButton > button {
-        background: linear-gradient(90deg, #ff1493 0%, #ff69b4 100%);
+        background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
         color: white;
         border: none;
         border-radius: 25px;
-        padding: 0.5rem 2rem;
+        padding: 0.75rem 2rem;
         font-weight: bold;
         font-size: 1.1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 16px rgba(255, 20, 147, 0.3);
     }
     
     .stButton > button:hover {
-        background: linear-gradient(90deg, #dc143c 0%, #ff1493 100%);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(255, 20, 147, 0.3);
+        background: linear-gradient(135deg, #dc143c 0%, #ff1493 100%);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(255, 20, 147, 0.4);
     }
     
     .secondary-button {
-        background: linear-gradient(90deg, #98fb98 0%, #90ee90 100%) !important;
+        background: linear-gradient(135deg, #98fb98 0%, #90ee90 100%) !important;
         color: #006400 !important;
     }
     
     .secondary-button:hover {
-        background: linear-gradient(90deg, #90ee90 0%, #7cfc00 100%) !important;
+        background: linear-gradient(135deg, #90ee90 0%, #7cfc00 100%) !important;
     }
     
     .exit-button {
-        background: linear-gradient(90deg, #87ceeb 0%, #87cefa 100%) !important;
+        background: linear-gradient(135deg, #87ceeb 0%, #87cefa 100%) !important;
         color: #000080 !important;
     }
     
     .exit-button:hover {
-        background: linear-gradient(90deg, #87cefa 0%, #00bfff 100%) !important;
+        background: linear-gradient(135deg, #87cefa 0%, #00bfff 100%) !important;
     }
+    
+    /* Form styling */
+    .stTextInput > div > div > input {
+        border-radius: 10px;
+        border: 2px solid #ffb6c1;
+        padding: 0.5rem;
+    }
+    
+    .stNumberInput > div > div > input {
+        border-radius: 10px;
+        border: 2px solid #ffb6c1;
+        padding: 0.5rem;
+    }
+    
+    .stDateInput > div > div > input {
+        border-radius: 10px;
+        border: 2px solid #ffb6c1;
+        padding: 0.5rem;
+    }
+    
+    /* Radio button styling */
+    .stRadio > div > div > label {
+        background: linear-gradient(135deg, #fff8fa 0%, #ffe6f2 100%);
+        border: 2px solid #ffb6c1;
+        border-radius: 10px;
+        padding: 0.75rem;
+        margin: 0.25rem 0;
+        transition: all 0.2s ease;
+    }
+    
+    .stRadio > div > div > label:hover {
+        background: linear-gradient(135deg, #ffe6f2 0%, #ffb6c1 100%);
+        transform: translateX(5px);
+    }
+    
+    /* Checkbox styling */
+    .stCheckbox > div > div > label {
+        background: linear-gradient(135deg, #fff8fa 0%, #ffe6f2 100%);
+        border: 2px solid #ffb6c1;
+        border-radius: 8px;
+        padding: 0.5rem;
+        margin: 0.25rem 0;
+        transition: all 0.2s ease;
+    }
+    
+    .stCheckbox > div > div > label:hover {
+        background: linear-gradient(135deg, #ffe6f2 0%, #ffb6c1 100%);
+    }
+    
+    /* Download button styling */
+    .stDownloadButton > button {
+        background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+        color: white;
+        border: none;
+        border-radius: 20px;
+        padding: 0.5rem 1.5rem;
+        font-weight: bold;
+        margin: 0.5rem 0;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 16px rgba(255, 105, 180, 0.3);
+    }
+    
+    .stDownloadButton > button:hover {
+        background: linear-gradient(135deg, #ff1493 0%, #dc143c 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .main-header {
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .card {
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .stButton > button {
+            padding: 0.5rem 1.5rem;
+            font-size: 1rem;
+        }
+    }
+    
+    /* Hide Streamlit default elements */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
 </style>
 """, unsafe_allow_html=True)
 
@@ -95,10 +199,10 @@ def main():
     # Main header with Hello Kitty theme
     st.markdown("""
     <div class="main-header">
-        <h1 style="text-align: center; color: #ff69b4; font-family: 'Comic Sans MS', cursive;">
+        <h1 style="text-align: center; color: #ff69b4; font-family: 'Comic Sans MS', cursive; margin-bottom: 0.5rem;">
             🎀 Hello Kitty Schedule Generator 🎀
         </h1>
-        <p style="text-align: center; color: #ff1493; font-family: 'Comic Sans MS', cursive; font-size: 1.2rem;">
+        <p style="text-align: center; color: #ff1493; font-family: 'Comic Sans MS', cursive; font-size: 1.3rem; margin: 0;">
             ✨ Create magical work schedules with Hello Kitty ✨
         </p>
     </div>
@@ -108,13 +212,15 @@ def main():
     with st.sidebar:
         st.markdown("""
         <div class="card">
-            <h3 style="color: #ff69b4; font-family: 'Comic Sans MS', cursive;">🌸 Hello Kitty Tips 🌸</h3>
-            <ul style="color: #c71585; font-family: 'Comic Sans MS', cursive;">
-                <li>Mode 1: Specify weekly hours and total days</li>
-                <li>Mode 2: Specify total overall hours (auto-distributed)</li>
-                <li>Time slots: 30-minute increments between 09:00-18:00</li>
-                <li>Daily work: 30-120 minutes per day</li>
-                <li>Maximum: 15 hours per week</li>
+            <h3 style="color: #ff69b4; font-family: 'Comic Sans MS', cursive; text-align: center; margin-bottom: 1rem;">
+                🌸 Hello Kitty Tips 🌸
+            </h3>
+            <ul style="color: #c71585; font-family: 'Comic Sans MS', cursive; line-height: 1.6;">
+                <li><strong>Mode 1:</strong> Specify weekly hours and total days</li>
+                <li><strong>Mode 2:</strong> Specify total overall hours (auto-distributed)</li>
+                <li><strong>Time slots:</strong> 30-minute increments between 09:00-18:00</li>
+                <li><strong>Daily work:</strong> 30-120 minutes per day</li>
+                <li><strong>Maximum:</strong> 15 hours per week</li>
             </ul>
         </div>
         """, unsafe_allow_html=True)
@@ -124,108 +230,181 @@ def main():
             st.image("hello_kitty.png", width=150)
         elif os.path.exists("hello_kitty.jpg"):
             st.image("hello_kitty.jpg", width=150)
+        
+        # Quick start guide
+        with st.expander("🚀 Quick Start Guide", expanded=False):
+            st.markdown("""
+            **1. Choose Mode**: Select between weekly or total hours
+            **2. Set Date**: Pick your start date
+            **3. Enter Hours**: Specify your work hours
+            **4. Choose Format**: Select export options
+            **5. Generate**: Click the magic button!
+            """)
     
-    # Main content area
-    col1, col2 = st.columns([2, 1])
+    # Main content area with improved layout
+    # Use tabs for better organization
+    tab1, tab2, tab3 = st.tabs(["🎀 Schedule Generator", "📊 Preview", "⚙️ Settings"])
     
-    with col1:
-        # Mode selection
+    with tab1:
+        # Mode selection with better visual separation
         st.markdown("""
         <div class="card">
-            <h3 style="color: #ff69b4; font-family: 'Comic Sans MS', cursive;">🎀 Choose Your Magic Mode 🎀</h3>
+            <h3 style="color: #ff69b4; font-family: 'Comic Sans MS', cursive; text-align: center;">
+                🎀 Choose Your Magic Mode 🎀
+            </h3>
         </div>
         """, unsafe_allow_html=True)
         
         mode = st.radio(
-            "Select Mode:",
+            "Select Generation Mode:",
             ["🌸 Mode 1: Input total weekly hours", "🎀 Mode 2: Input total overall hours"],
-            format_func=lambda x: x.split(": ")[1] if ": " in x else x
+            format_func=lambda x: x.split(": ")[1] if ": " in x else x,
+            help="Mode 1: Set weekly hours and days. Mode 2: Set total hours (auto-distributed)"
         )
         
-        # Schedule parameters
+        # Schedule parameters in a more organized layout
         st.markdown("""
         <div class="card">
-            <h3 style="color: #ff69b4; font-family: 'Comic Sans MS', cursive;">🌸 Schedule Parameters 🌸</h3>
+            <h3 style="color: #ff69b4; font-family: 'Comic Sans MS', cursive; text-align: center;">
+                🌸 Schedule Parameters 🌸
+            </h3>
         </div>
         """, unsafe_allow_html=True)
         
-        # Input fields
-        start_date = st.date_input(
-            "🎀 Start Date:",
-            value=datetime.now(),
-            format="YYYY-MM-DD"
-        )
+        # Use columns for better input organization
+        col_date, col_week = st.columns(2)
         
-        start_week = st.number_input(
-            "🎀 Starting Week Number:",
-            min_value=1,
-            value=1,
-            step=1
-        )
-        
-        if "weekly" in mode:
-            # Mode 1 inputs
-            total_hours = st.number_input(
-                "🌸 Total Weekly Hours:",
-                min_value=0.5,
-                max_value=15.0,
-                value=10.0,
-                step=0.5,
-                help="Maximum 15 hours per week"
+        with col_date:
+            start_date = st.date_input(
+                "🎀 Start Date:",
+                value=datetime.now(),
+                format="YYYY-MM-DD",
+                help="Choose the starting date for your schedule"
             )
-            
-            total_days = st.number_input(
-                "🎀 Total Days:",
+        
+        with col_week:
+            start_week = st.number_input(
+                "🎀 Starting Week Number:",
                 min_value=1,
-                value=7,
-                step=1
+                value=1,
+                step=1,
+                help="Set the week number to start from"
             )
+        
+        # Mode-specific inputs with better spacing
+        if "weekly" in mode:
+            st.markdown("### 📅 Mode 1: Weekly Schedule")
+            col_hours, col_days = st.columns(2)
+            
+            with col_hours:
+                total_hours = st.number_input(
+                    "🌸 Total Weekly Hours:",
+                    min_value=0.5,
+                    max_value=15.0,
+                    value=10.0,
+                    step=0.5,
+                    help="Maximum 15 hours per week"
+                )
+            
+            with col_days:
+                total_days = st.number_input(
+                    "🎀 Total Days:",
+                    min_value=1,
+                    value=7,
+                    step=1,
+                    help="Number of days to generate schedule for"
+                )
         else:
-            # Mode 2 inputs
+            st.markdown("### 📅 Mode 2: Total Hours Schedule")
             total_overall_hours = st.number_input(
                 "🌸 Total Overall Hours:",
                 min_value=0.5,
                 value=50.0,
-                step=0.5
+                step=0.5,
+                help="Total hours to distribute across weeks"
             )
         
-        # Output settings
+        # Output settings with better organization
         st.markdown("""
         <div class="card">
-            <h3 style="color: #ff69b4; font-family: 'Comic Sans MS', cursive;">🎀 Output Settings 🎀</h3>
+            <h3 style="color: #ff69b4; font-family: 'Comic Sans MS', cursive; text-align: center;">
+                🎀 Output Settings 🎀
+            </h3>
         </div>
         """, unsafe_allow_html=True)
         
         filename = st.text_input(
             "🌸 Filename:",
             value="hello_kitty_schedule",
-            help="Files will be saved with this name"
+            help="Files will be saved with this name (no spaces recommended)"
         )
         
+        st.markdown("**📄 Export Formats:**")
         col_export1, col_export2, col_export3 = st.columns(3)
         with col_export1:
-            export_txt = st.checkbox("📄 Text", value=True)
+            export_txt = st.checkbox("📄 Text File", value=True, help="Human-readable schedule")
         with col_export2:
-            export_xlsx = st.checkbox("📊 Excel", value=True)
+            export_xlsx = st.checkbox("📊 Excel File", value=True, help="Spreadsheet format")
         with col_export3:
-            export_docx = st.checkbox("📝 Word", value=True)
+            export_docx = st.checkbox("📝 Word File", value=True, help="Document format")
+        
+        # Action buttons with better spacing
+        st.markdown("---")
+        st.markdown("### 🌸 Generate Your Schedule")
+        
+        col_generate, col_clear, col_exit = st.columns([2, 1, 1])
+        
+        with col_generate:
+            if st.button("🌸 Generate Magic Schedule 🌸", use_container_width=True, type="primary"):
+                generate_schedule_web()
+        
+        with col_clear:
+            if st.button("🎀 Clear Form", use_container_width=True, key="clear"):
+                st.rerun()
+        
+        with col_exit:
+            if st.button("🌸 Exit", use_container_width=True, key="exit"):
+                st.stop()
     
-    with col2:
-        # Action buttons
+    with tab2:
         st.markdown("""
         <div class="card">
-            <h3 style="color: #ff69b4; font-family: 'Comic Sans MS', cursive;">🌸 Generate Schedule 🌸</h3>
+            <h3 style="color: #ff69b4; font-family: 'Comic Sans MS', cursive; text-align: center;">
+                📊 Schedule Preview
+            </h3>
+            <p style="text-align: center; color: #c71585;">
+                Generate a schedule first to see the preview here! 🌸
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with tab3:
+        st.markdown("""
+        <div class="card">
+            <h3 style="color: #ff69b4; font-family: 'Comic Sans MS', cursive; text-align: center;">
+                ⚙️ App Settings
+            </h3>
         </div>
         """, unsafe_allow_html=True)
         
-        if st.button("🌸 Generate Magic Schedule 🌸", use_container_width=True):
-            generate_schedule_web()
+        st.info("🌸 This is the Hello Kitty Schedule Generator - a magical tool for creating work schedules!")
         
-        if st.button("🎀 Clear Form", use_container_width=True, key="clear"):
-            st.rerun()
+        # App information
+        st.markdown("### 📋 App Information")
+        st.markdown("""
+        - **Version**: 2.0 (Web Edition)
+        - **Theme**: Hello Kitty Pink
+        - **Framework**: Streamlit
+        - **Features**: Multiple export formats, responsive design
+        """)
         
-        if st.button("🌸 Exit", use_container_width=True, key="exit"):
-            st.stop()
+        # Contact/Support
+        st.markdown("### 🎀 Support")
+        st.markdown("""
+        If you love this app, please give it a ⭐ star on GitHub!
+        
+        **Repository**: [Weekly-Work-Schedule-Generator-Hello-Kitty-WEB](https://github.com/candyyetszyu/Weekly-Work-Schedule-Generator-Hello-Kitty-WEB)
+        """)
     
     # Function to generate schedule
     def generate_schedule_web():
@@ -247,7 +426,7 @@ def main():
                     st.error("Total overall hours must be greater than 0")
                     return
             
-            # Show progress
+            # Show progress with better styling
             with st.spinner("🌸 Creating your magical Hello Kitty schedule... 🌸"):
                 start_date_str = start_date.strftime("%Y-%m-%d")
                 
@@ -266,7 +445,6 @@ def main():
             
             # Check which files were created and provide download links
             created_files = []
-            download_links = []
             
             if export_txt and os.path.exists(f"{filename.strip()}.txt"):
                 created_files.append(".txt")
@@ -299,29 +477,29 @@ def main():
                         mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                     )
             
-            # Success message
+            # Success message with better styling
             files_text = ", ".join(created_files) if created_files else "No files"
             st.success(f"""
-            🌸 Hello Kitty schedule created successfully! 🌸
+            🌸 **Hello Kitty schedule created successfully!** 🌸
             
-            Files created: {files_text}
-            Location: {os.getcwd()}
+            **Files created:** {files_text}
+            **Location:** {os.getcwd()}
             """)
             
-            # Display preview if text file was created
+            # Display preview in the Preview tab
             if export_txt and os.path.exists(f"{filename.strip()}.txt"):
-                with st.expander("📄 Preview Schedule"):
+                with st.expander("📄 Preview Schedule", expanded=True):
                     with open(f"{filename.strip()}.txt", "r") as f:
                         st.text(f.read())
             
             # Display Excel preview if created
             if export_xlsx and os.path.exists(f"{filename.strip()}.xlsx"):
-                with st.expander("📊 Preview Excel Data"):
+                with st.expander("📊 Preview Excel Data", expanded=False):
                     df = pd.read_excel(f"{filename.strip()}.xlsx")
                     st.dataframe(df, use_container_width=True)
                     
         except Exception as e:
-            st.error(f"🌸 Oops! Something went wrong with the magic... 🌸\n\nError: {str(e)}")
+            st.error(f"🌸 Oops! Something went wrong with the magic... 🌸\n\n**Error:** {str(e)}")
 
 if __name__ == "__main__":
     main() 
