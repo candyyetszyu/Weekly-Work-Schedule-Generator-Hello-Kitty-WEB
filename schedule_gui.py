@@ -387,7 +387,7 @@ class ScheduleGeneratorGUI:
                                 command=self.generate_schedule,
                                 font=("Comic Sans MS", 11, "bold"),
                                 bg='#ff1493',  # Deep pink - very distinct magic color
-                                fg='white',
+                                fg='#000080',
                                 activebackground='#dc143c',  # Crimson when pressed
                                 activeforeground='white',
                                 relief='raised',
@@ -402,7 +402,7 @@ class ScheduleGeneratorGUI:
                              command=self.clear_form,
                              font=("Comic Sans MS", 10),
                              bg='#98fb98',  # Pale green
-                             fg='#006400',  # Dark green text
+                             fg='#000080',  # Dark green text
                              activebackground='#90ee90',
                              activeforeground='#006400',
                              relief='raised',
