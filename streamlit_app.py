@@ -20,178 +20,40 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for Hello Kitty theme with improved UX
+# Custom CSS for smaller cards and wider sidebar
 st.markdown("""
 <style>
-    /* Main container styling */
-    .main-header {
-        background: linear-gradient(135deg, #ffe6f2 0%, #fff0f5 50%, #ffe6f2 100%);
-        padding: 2rem 1.5rem;
-        border-radius: 20px;
-        border: 3px solid #ff69b4;
-        margin-bottom: 2rem;
-        box-shadow: 0 8px 32px rgba(255, 105, 180, 0.2);
+    /* Make sidebar wider */
+    section[data-testid="stSidebar"] {
+        min-width: 350px !important;
+        max-width: 400px !important;
     }
-    
+    /* Smaller card styling */
     .card {
         background: linear-gradient(135deg, #fff8fa 0%, #fff0f5 100%);
-        padding: 1.5rem;
-        border-radius: 15px;
-        border: 2px solid #ffb6c1;
-        margin-bottom: 1.5rem;
-        box-shadow: 0 4px 16px rgba(255, 182, 193, 0.15);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    
-    .card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(255, 182, 193, 0.25);
-    }
-    
-    .success-message {
-        background: linear-gradient(135deg, #e8f5e8 0%, #f0fff0 100%);
-        padding: 1.5rem;
-        border-radius: 15px;
-        border: 2px solid #90ee90;
-        margin: 1rem 0;
-        box-shadow: 0 4px 16px rgba(144, 238, 144, 0.2);
-    }
-    
-    .error-message {
-        background: linear-gradient(135deg, #ffe6e6 0%, #fff0f0 100%);
-        padding: 1.5rem;
-        border-radius: 15px;
-        border: 2px solid #ff6b6b;
-        margin: 1rem 0;
-        box-shadow: 0 4px 16px rgba(255, 107, 107, 0.2);
-    }
-    
-    /* Button styling */
-    .stButton > button {
-        background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
-        color: white;
-        border: none;
-        border-radius: 25px;
-        padding: 0.75rem 2rem;
-        font-weight: bold;
-        font-size: 1.1rem;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 16px rgba(255, 20, 147, 0.3);
-    }
-    
-    .stButton > button:hover {
-        background: linear-gradient(135deg, #dc143c 0%, #ff1493 100%);
-        transform: translateY(-3px);
-        box-shadow: 0 8px 24px rgba(255, 20, 147, 0.4);
-    }
-    
-    .secondary-button {
-        background: linear-gradient(135deg, #98fb98 0%, #90ee90 100%) !important;
-        color: #006400 !important;
-    }
-    
-    .secondary-button:hover {
-        background: linear-gradient(135deg, #90ee90 0%, #7cfc00 100%) !important;
-    }
-    
-    .exit-button {
-        background: linear-gradient(135deg, #87ceeb 0%, #87cefa 100%) !important;
-        color: #000080 !important;
-    }
-    
-    .exit-button:hover {
-        background: linear-gradient(135deg, #87cefa 0%, #00bfff 100%) !important;
-    }
-    
-    /* Form styling */
-    .stTextInput > div > div > input {
+        padding: 0.75rem 1rem;
         border-radius: 10px;
         border: 2px solid #ffb6c1;
-        padding: 0.5rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 8px rgba(255, 182, 193, 0.10);
+        font-size: 1rem;
     }
-    
-    .stNumberInput > div > div > input {
-        border-radius: 10px;
-        border: 2px solid #ffb6c1;
-        padding: 0.5rem;
+    .card h3 {
+        margin-bottom: 0.5rem;
+        font-size: 1.15rem;
     }
-    
-    .stDateInput > div > div > input {
-        border-radius: 10px;
-        border: 2px solid #ffb6c1;
-        padding: 0.5rem;
+    /* Sidebar tips styling */
+    .kitty-tips-list {
+        color: #c71585;
+        font-family: 'Comic Sans MS', cursive;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        margin-left: 0.5rem;
+        margin-bottom: 0.5rem;
     }
-    
-    /* Radio button styling */
-    .stRadio > div > div > label {
-        background: linear-gradient(135deg, #fff8fa 0%, #ffe6f2 100%);
-        border: 2px solid #ffb6c1;
-        border-radius: 10px;
-        padding: 0.75rem;
-        margin: 0.25rem 0;
-        transition: all 0.2s ease;
+    .kitty-tips-list li {
+        margin-bottom: 0.3rem;
     }
-    
-    .stRadio > div > div > label:hover {
-        background: linear-gradient(135deg, #ffe6f2 0%, #ffb6c1 100%);
-        transform: translateX(5px);
-    }
-    
-    /* Checkbox styling */
-    .stCheckbox > div > div > label {
-        background: linear-gradient(135deg, #fff8fa 0%, #ffe6f2 100%);
-        border: 2px solid #ffb6c1;
-        border-radius: 8px;
-        padding: 0.5rem;
-        margin: 0.25rem 0;
-        transition: all 0.2s ease;
-    }
-    
-    .stCheckbox > div > div > label:hover {
-        background: linear-gradient(135deg, #ffe6f2 0%, #ffb6c1 100%);
-    }
-    
-    /* Download button styling */
-    .stDownloadButton > button {
-        background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
-        color: white;
-        border: none;
-        border-radius: 20px;
-        padding: 0.5rem 1.5rem;
-        font-weight: bold;
-        margin: 0.5rem 0;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 16px rgba(255, 105, 180, 0.3);
-    }
-    
-    .stDownloadButton > button:hover {
-        background: linear-gradient(135deg, #ff1493 0%, #dc143c 100%);
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
-    }
-    
-    /* Responsive design */
-    @media (max-width: 768px) {
-        .main-header {
-            padding: 1rem;
-            margin-bottom: 1rem;
-        }
-        
-        .card {
-            padding: 1rem;
-            margin-bottom: 1rem;
-        }
-        
-        .stButton > button {
-            padding: 0.5rem 1.5rem;
-            font-size: 1rem;
-        }
-    }
-    
-    /* Hide Streamlit default elements */
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    header {visibility: hidden;}
 </style>
 """, unsafe_allow_html=True)
 
