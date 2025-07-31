@@ -12,393 +12,398 @@ import os
 class ScheduleGeneratorGUI:
     def __init__(self, root):
         self.root = root
-        self.root.title("🗓 Weekly Work Schedule Generator")
-        self.root.geometry("700x800")
+        self.root.title("🎀 Hello Kitty Schedule Generator 🎀")
+        self.root.geometry("750x850")
         self.root.resizable(True, True)
         
         # Set window icon and configure
-        self.root.configure(bg='#f0f8ff')  # Light blue background
+        self.root.configure(bg='#ffe6f2')  # Light pink background
         
-        # Configure modern style
+        # Configure Hello Kitty style
         self.setup_styles()
         
         self.create_widgets()
         
     def setup_styles(self):
-        """Configure modern styles for the GUI"""
+        """Configure Hello Kitty styles for the GUI"""
         style = ttk.Style()
         style.theme_use('clam')
         
-        # Configure colors
+        # Configure Hello Kitty colors
         style.configure('Title.TLabel', 
-                       font=('Helvetica', 18, 'bold'), 
-                       foreground='#2c3e50',
-                       background='#f0f8ff')
+                       font=('Comic Sans MS', 20, 'bold'), 
+                       foreground='#ff69b4',
+                       background='#ffe6f2')
         
         style.configure('Header.TLabel', 
-                       font=('Helvetica', 12, 'bold'), 
-                       foreground='#34495e',
-                       background='#f0f8ff')
+                       font=('Comic Sans MS', 14, 'bold'), 
+                       foreground='#ff1493',
+                       background='#ffe6f2')
         
         style.configure('Info.TLabel', 
-                       font=('Helvetica', 10), 
-                       foreground='#7f8c8d',
-                       background='#f0f8ff')
+                       font=('Comic Sans MS', 11), 
+                       foreground='#c71585',
+                       background='#ffe6f2')
         
         style.configure('Success.TLabel', 
-                       font=('Helvetica', 10), 
-                       foreground='#27ae60',
-                       background='#f0f8ff')
+                       font=('Comic Sans MS', 11), 
+                       foreground='#ff69b4',
+                       background='#ffe6f2')
         
         style.configure('Error.TLabel', 
-                       font=('Helvetica', 10), 
-                       foreground='#e74c3c',
-                       background='#f0f8ff')
+                       font=('Comic Sans MS', 11), 
+                       foreground='#ff1493',
+                       background='#ffe6f2')
         
         # Frame styles
         style.configure('Card.TFrame', 
-                       background='#ffffff',
+                       background='#fff0f5',
                        relief='solid',
-                       borderwidth=1)
+                       borderwidth=2)
         
         # Button styles
         style.configure('Primary.TButton', 
-                       font=('Helvetica', 11, 'bold'),
-                       background='#3498db',
+                       font=('Comic Sans MS', 12, 'bold'),
+                       background='#ff69b4',
                        foreground='white')
         
         style.configure('Success.TButton', 
-                       font=('Helvetica', 11),
-                       background='#2ecc71',
+                       font=('Comic Sans MS', 11),
+                       background='#ff1493',
                        foreground='white')
         
         style.configure('Warning.TButton', 
-                       font=('Helvetica', 11),
-                       background='#e67e22',
+                       font=('Comic Sans MS', 11),
+                       background='#ffb6c1',
                        foreground='white')
         
         # Progress bar style
         style.configure('Custom.Horizontal.TProgressbar',
-                       background='#3498db',
-                       troughcolor='#ecf0f1')
+                       background='#ff69b4',
+                       troughcolor='#ffe6f2')
         
     def create_widgets(self):
-        # Main frame with background
-        main_frame = tk.Frame(self.root, bg='#f0f8ff', padx=30, pady=30)
+        # Main frame with Hello Kitty background
+        main_frame = tk.Frame(self.root, bg='#ffe6f2', padx=35, pady=35)
         main_frame.pack(fill=tk.BOTH, expand=True)
         
-        # Title with modern styling
-        title_frame = tk.Frame(main_frame, bg='#f0f8ff')
+        # Title with Hello Kitty styling
+        title_frame = tk.Frame(main_frame, bg='#ffe6f2')
         title_frame.pack(fill=tk.X, pady=(0, 30))
         
         title_label = tk.Label(title_frame, 
-                              text="🗓 Weekly Work Schedule Generator", 
-                              font=("Helvetica", 24, "bold"),
-                              fg='#2c3e50',
-                              bg='#f0f8ff')
+                              text="🎀 Hello Kitty Schedule Generator 🎀", 
+                              font=("Comic Sans MS", 26, "bold"),
+                              fg='#ff69b4',
+                              bg='#ffe6f2')
         title_label.pack()
         
         subtitle_label = tk.Label(title_frame,
-                                 text="Create professional work schedules with ease",
-                                 font=("Helvetica", 12),
-                                 fg='#7f8c8d',
-                                 bg='#f0f8ff')
-        subtitle_label.pack(pady=(5, 0))
+                                 text="✨ Create magical work schedules with Hello Kitty ✨",
+                                 font=("Comic Sans MS", 14),
+                                 fg='#ff1493',
+                                 bg='#ffe6f2')
+        subtitle_label.pack(pady=(8, 0))
         
-        # Mode selection with modern card design
-        mode_frame = tk.Frame(main_frame, bg='#ffffff', relief='solid', bd=1, padx=20, pady=20)
+        # Mode selection with Hello Kitty card design
+        mode_frame = tk.Frame(main_frame, bg='#fff0f5', relief='solid', bd=2, padx=25, pady=25)
         mode_frame.pack(fill=tk.X, pady=(0, 20))
         
-        mode_title = tk.Label(mode_frame, text="📋 Mode Selection", 
-                             font=("Helvetica", 14, "bold"),
-                             fg='#2c3e50',
-                             bg='#ffffff')
+        mode_title = tk.Label(mode_frame, text="🎀 Choose Your Magic Mode 🎀", 
+                             font=("Comic Sans MS", 16, "bold"),
+                             fg='#ff69b4',
+                             bg='#fff0f5')
         mode_title.pack(anchor=tk.W, pady=(0, 15))
         
         self.mode_var = tk.StringVar(value="1")
         
         # Mode 1
-        mode1_frame = tk.Frame(mode_frame, bg='#ffffff')
-        mode1_frame.pack(fill=tk.X, pady=5)
+        mode1_frame = tk.Frame(mode_frame, bg='#fff0f5')
+        mode1_frame.pack(fill=tk.X, pady=8)
         
         mode1_radio = tk.Radiobutton(mode1_frame, 
-                                   text="📅 Mode 1: Input total weekly hours", 
+                                   text="🌸 Mode 1: Input total weekly hours", 
                                    variable=self.mode_var, 
                                    value="1", 
                                    command=self.on_mode_change,
-                                   font=("Helvetica", 11),
-                                   fg='#34495e',
-                                   bg='#ffffff',
-                                   selectcolor='#3498db')
+                                   font=("Comic Sans MS", 12),
+                                   fg='#ff1493',
+                                   bg='#fff0f5',
+                                   selectcolor='#ff69b4')
         mode1_radio.pack(anchor=tk.W)
         
         mode1_desc = tk.Label(mode1_frame, 
-                             text="   Specify weekly hours and total number of days",
-                             font=("Helvetica", 9),
-                             fg='#7f8c8d',
-                             bg='#ffffff')
-        mode1_desc.pack(anchor=tk.W, padx=(20, 0))
+                             text="   ✨ Specify weekly hours and total number of days",
+                             font=("Comic Sans MS", 10),
+                             fg='#c71585',
+                             bg='#fff0f5')
+        mode1_desc.pack(anchor=tk.W, padx=(25, 0))
         
         # Mode 2
-        mode2_frame = tk.Frame(mode_frame, bg='#ffffff')
-        mode2_frame.pack(fill=tk.X, pady=5)
+        mode2_frame = tk.Frame(mode_frame, bg='#fff0f5')
+        mode2_frame.pack(fill=tk.X, pady=8)
         
         mode2_radio = tk.Radiobutton(mode2_frame, 
-                                   text="📊 Mode 2: Input total overall hours", 
+                                   text="🎀 Mode 2: Input total overall hours", 
                                    variable=self.mode_var, 
                                    value="2", 
                                    command=self.on_mode_change,
-                                   font=("Helvetica", 11),
-                                   fg='#34495e',
-                                   bg='#ffffff',
-                                   selectcolor='#3498db')
+                                   font=("Comic Sans MS", 12),
+                                   fg='#ff1493',
+                                   bg='#fff0f5',
+                                   selectcolor='#ff69b4')
         mode2_radio.pack(anchor=tk.W)
         
         mode2_desc = tk.Label(mode2_frame, 
-                             text="   System will automatically distribute across weeks",
-                             font=("Helvetica", 9),
-                             fg='#7f8c8d',
-                             bg='#ffffff')
-        mode2_desc.pack(anchor=tk.W, padx=(20, 0))
+                             text="   ✨ System will automatically distribute across weeks",
+                             font=("Comic Sans MS", 10),
+                             fg='#c71585',
+                             bg='#fff0f5')
+        mode2_desc.pack(anchor=tk.W, padx=(25, 0))
         
-        # Input parameters with modern card design
-        input_frame = tk.Frame(main_frame, bg='#ffffff', relief='solid', bd=1, padx=20, pady=20)
+        # Input parameters with Hello Kitty card design
+        input_frame = tk.Frame(main_frame, bg='#fff0f5', relief='solid', bd=2, padx=25, pady=25)
         input_frame.pack(fill=tk.X, pady=(0, 20))
         
-        input_title = tk.Label(input_frame, text="⚙️ Schedule Parameters", 
-                              font=("Helvetica", 14, "bold"),
-                              fg='#2c3e50',
-                              bg='#ffffff')
+        input_title = tk.Label(input_frame, text="🌸 Schedule Parameters 🌸", 
+                              font=("Comic Sans MS", 16, "bold"),
+                              fg='#ff69b4',
+                              bg='#fff0f5')
         input_title.pack(anchor=tk.W, pady=(0, 15))
         
         # Create a grid for input fields
-        input_grid = tk.Frame(input_frame, bg='#ffffff')
+        input_grid = tk.Frame(input_frame, bg='#fff0f5')
         input_grid.pack(fill=tk.X)
         
         # Start date
-        tk.Label(input_grid, text="📅 Start Date (YYYY-MM-DD):", 
-                font=("Helvetica", 11, "bold"),
-                fg='#34495e',
-                bg='#ffffff').grid(row=0, column=0, sticky=tk.W, pady=8, padx=(0, 20))
+        tk.Label(input_grid, text="🎀 Start Date (YYYY-MM-DD):", 
+                font=("Comic Sans MS", 12, "bold"),
+                fg='#ff1493',
+                bg='#fff0f5').grid(row=0, column=0, sticky=tk.W, pady=10, padx=(0, 25))
         
         self.date_var = tk.StringVar(value=datetime.now().strftime("%Y-%m-%d"))
         self.date_entry = tk.Entry(input_grid, textvariable=self.date_var, 
-                                 font=("Helvetica", 11),
-                                 width=15,
+                                 font=("Comic Sans MS", 11),
+                                 width=18,
                                  relief='solid',
-                                 bd=1)
-        self.date_entry.grid(row=0, column=1, sticky=tk.W, pady=8)
+                                 bd=2,
+                                 bg='#fff8fa')
+        self.date_entry.grid(row=0, column=1, sticky=tk.W, pady=10)
         
         # Start week
-        tk.Label(input_grid, text="📊 Starting Week Number:", 
-                font=("Helvetica", 11, "bold"),
-                fg='#34495e',
-                bg='#ffffff').grid(row=1, column=0, sticky=tk.W, pady=8, padx=(0, 20))
+        tk.Label(input_grid, text="🎀 Starting Week Number:", 
+                font=("Comic Sans MS", 12, "bold"),
+                fg='#ff1493',
+                bg='#fff0f5').grid(row=1, column=0, sticky=tk.W, pady=10, padx=(0, 25))
         
         self.week_var = tk.StringVar(value="1")
         self.week_entry = tk.Entry(input_grid, textvariable=self.week_var, 
-                                 font=("Helvetica", 11),
-                                 width=15,
+                                 font=("Comic Sans MS", 11),
+                                 width=18,
                                  relief='solid',
-                                 bd=1)
-        self.week_entry.grid(row=1, column=1, sticky=tk.W, pady=8)
+                                 bd=2,
+                                 bg='#fff8fa')
+        self.week_entry.grid(row=1, column=1, sticky=tk.W, pady=10)
         
         # Hours input
-        tk.Label(input_grid, text="⏰ Total Hours:", 
-                font=("Helvetica", 11, "bold"),
-                fg='#34495e',
-                bg='#ffffff').grid(row=2, column=0, sticky=tk.W, pady=8, padx=(0, 20))
+        tk.Label(input_grid, text="🌸 Total Hours:", 
+                font=("Comic Sans MS", 12, "bold"),
+                fg='#ff1493',
+                bg='#fff0f5').grid(row=2, column=0, sticky=tk.W, pady=10, padx=(0, 25))
         
         self.hours_var = tk.StringVar(value="10")
         self.hours_entry = tk.Entry(input_grid, textvariable=self.hours_var, 
-                                  font=("Helvetica", 11),
-                                  width=15,
+                                  font=("Comic Sans MS", 11),
+                                  width=18,
                                   relief='solid',
-                                  bd=1)
-        self.hours_entry.grid(row=2, column=1, sticky=tk.W, pady=8)
+                                  bd=2,
+                                  bg='#fff8fa')
+        self.hours_entry.grid(row=2, column=1, sticky=tk.W, pady=10)
         
         # Days input (for mode 1)
-        self.days_label = tk.Label(input_grid, text="📅 Total Days:", 
-                                  font=("Helvetica", 11, "bold"),
-                                  fg='#34495e',
-                                  bg='#ffffff')
-        self.days_label.grid(row=3, column=0, sticky=tk.W, pady=8, padx=(0, 20))
+        self.days_label = tk.Label(input_grid, text="🎀 Total Days:", 
+                                  font=("Comic Sans MS", 12, "bold"),
+                                  fg='#ff1493',
+                                  bg='#fff0f5')
+        self.days_label.grid(row=3, column=0, sticky=tk.W, pady=10, padx=(0, 25))
         
         self.days_var = tk.StringVar(value="7")
         self.days_entry = tk.Entry(input_grid, textvariable=self.days_var, 
-                                 font=("Helvetica", 11),
-                                 width=15,
+                                 font=("Comic Sans MS", 11),
+                                 width=18,
                                  relief='solid',
-                                 bd=1)
-        self.days_entry.grid(row=3, column=1, sticky=tk.W, pady=8)
+                                 bd=2,
+                                 bg='#fff8fa')
+        self.days_entry.grid(row=3, column=1, sticky=tk.W, pady=10)
         
-        # Output settings with modern card design
-        output_frame = tk.Frame(main_frame, bg='#ffffff', relief='solid', bd=1, padx=20, pady=20)
+        # Output settings with Hello Kitty card design
+        output_frame = tk.Frame(main_frame, bg='#fff0f5', relief='solid', bd=2, padx=25, pady=25)
         output_frame.pack(fill=tk.X, pady=(0, 20))
         
-        output_title = tk.Label(output_frame, text="📁 Output Settings", 
-                               font=("Helvetica", 14, "bold"),
-                               fg='#2c3e50',
-                               bg='#ffffff')
+        output_title = tk.Label(output_frame, text="🎀 Output Settings 🎀", 
+                               font=("Comic Sans MS", 16, "bold"),
+                               fg='#ff69b4',
+                               bg='#fff0f5')
         output_title.pack(anchor=tk.W, pady=(0, 15))
         
         # Filename section
-        filename_section = tk.Frame(output_frame, bg='#ffffff')
+        filename_section = tk.Frame(output_frame, bg='#fff0f5')
         filename_section.pack(fill=tk.X, pady=(0, 15))
         
-        tk.Label(filename_section, text="📄 Output Filename:", 
-                font=("Helvetica", 11, "bold"),
-                fg='#34495e',
-                bg='#ffffff').pack(anchor=tk.W, pady=(0, 5))
+        tk.Label(filename_section, text="🌸 Output Filename:", 
+                font=("Comic Sans MS", 12, "bold"),
+                fg='#ff1493',
+                bg='#fff0f5').pack(anchor=tk.W, pady=(0, 8))
         
-        filename_input_frame = tk.Frame(filename_section, bg='#ffffff')
+        filename_input_frame = tk.Frame(filename_section, bg='#fff0f5')
         filename_input_frame.pack(fill=tk.X)
         
-        self.filename_var = tk.StringVar(value="my_schedule")
+        self.filename_var = tk.StringVar(value="hello_kitty_schedule")
         self.filename_entry = tk.Entry(filename_input_frame, textvariable=self.filename_var, 
-                                     font=("Helvetica", 11),
-                                     width=25,
+                                     font=("Comic Sans MS", 11),
+                                     width=28,
                                      relief='solid',
-                                     bd=1)
-        self.filename_entry.pack(side=tk.LEFT, padx=(0, 10))
+                                     bd=2,
+                                     bg='#fff8fa')
+        self.filename_entry.pack(side=tk.LEFT, padx=(0, 12))
         
-        browse_btn = tk.Button(filename_input_frame, text="📂 Browse", 
+        browse_btn = tk.Button(filename_input_frame, text="🎀 Browse", 
                               command=self.browse_location,
-                              font=("Helvetica", 10),
-                              bg='#95a5a6',
+                              font=("Comic Sans MS", 10),
+                              bg='#ffb6c1',
                               fg='white',
                               relief='flat',
-                              padx=15,
-                              pady=5)
+                              padx=18,
+                              pady=6)
         browse_btn.pack(side=tk.LEFT)
         
         # Export options section
-        export_section = tk.Frame(output_frame, bg='#ffffff')
+        export_section = tk.Frame(output_frame, bg='#fff0f5')
         export_section.pack(fill=tk.X)
         
-        tk.Label(export_section, text="📊 Export Formats:", 
-                font=("Helvetica", 11, "bold"),
-                fg='#34495e',
-                bg='#ffffff').pack(anchor=tk.W, pady=(0, 10))
+        tk.Label(export_section, text="🌸 Export Formats:", 
+                font=("Comic Sans MS", 12, "bold"),
+                fg='#ff1493',
+                bg='#fff0f5').pack(anchor=tk.W, pady=(0, 12))
         
-        export_options_frame = tk.Frame(export_section, bg='#ffffff')
+        export_options_frame = tk.Frame(export_section, bg='#fff0f5')
         export_options_frame.pack(fill=tk.X)
         
         self.export_txt = tk.BooleanVar(value=True)
         self.export_xlsx = tk.BooleanVar(value=True)
         self.export_docx = tk.BooleanVar(value=True)
         
-        # Export checkboxes with custom styling
-        txt_cb = tk.Checkbutton(export_options_frame, text="📄 Text (.txt)", 
+        # Export checkboxes with Hello Kitty styling
+        txt_cb = tk.Checkbutton(export_options_frame, text="🌸 Text (.txt)", 
                                variable=self.export_txt,
-                               font=("Helvetica", 10),
-                               fg='#34495e',
-                               bg='#ffffff',
-                               selectcolor='#3498db')
-        txt_cb.pack(side=tk.LEFT, padx=(0, 20))
+                               font=("Comic Sans MS", 11),
+                               fg='#ff1493',
+                               bg='#fff0f5',
+                               selectcolor='#ff69b4')
+        txt_cb.pack(side=tk.LEFT, padx=(0, 25))
         
-        xlsx_cb = tk.Checkbutton(export_options_frame, text="📊 Excel (.xlsx)", 
+        xlsx_cb = tk.Checkbutton(export_options_frame, text="🎀 Excel (.xlsx)", 
                                 variable=self.export_xlsx,
-                                font=("Helvetica", 10),
-                                fg='#34495e',
-                                bg='#ffffff',
-                                selectcolor='#3498db')
-        xlsx_cb.pack(side=tk.LEFT, padx=(0, 20))
+                                font=("Comic Sans MS", 11),
+                                fg='#ff1493',
+                                bg='#fff0f5',
+                                selectcolor='#ff69b4')
+        xlsx_cb.pack(side=tk.LEFT, padx=(0, 25))
         
-        docx_cb = tk.Checkbutton(export_options_frame, text="📝 Word (.docx)", 
+        docx_cb = tk.Checkbutton(export_options_frame, text="🌸 Word (.docx)", 
                                 variable=self.export_docx,
-                                font=("Helvetica", 10),
-                                fg='#34495e',
-                                bg='#ffffff',
-                                selectcolor='#3498db')
+                                font=("Comic Sans MS", 11),
+                                fg='#ff1493',
+                                bg='#fff0f5',
+                                selectcolor='#ff69b4')
         docx_cb.pack(side=tk.LEFT)
         
-        # Action buttons with modern styling
-        button_frame = tk.Frame(main_frame, bg='#f0f8ff')
+        # Action buttons with Hello Kitty styling
+        button_frame = tk.Frame(main_frame, bg='#ffe6f2')
         button_frame.pack(fill=tk.X, pady=(0, 20))
         
         # Generate button (primary action)
-        generate_btn = tk.Button(button_frame, text="🚀 Generate Schedule", 
+        generate_btn = tk.Button(button_frame, text="🌸 Generate Magic Schedule 🌸", 
                                 command=self.generate_schedule,
-                                font=("Helvetica", 12, "bold"),
-                                bg='#3498db',
+                                font=("Comic Sans MS", 13, "bold"),
+                                bg='#ff69b4',
                                 fg='white',
                                 relief='flat',
-                                padx=30,
-                                pady=12,
+                                padx=35,
+                                pady=15,
                                 cursor='hand2')
-        generate_btn.pack(side=tk.LEFT, padx=(0, 15))
+        generate_btn.pack(side=tk.LEFT, padx=(0, 18))
         
         # Clear button
-        clear_btn = tk.Button(button_frame, text="🔄 Clear Form", 
+        clear_btn = tk.Button(button_frame, text="🎀 Clear Form", 
                              command=self.clear_form,
-                             font=("Helvetica", 11),
-                             bg='#95a5a6',
+                             font=("Comic Sans MS", 12),
+                             bg='#ffb6c1',
                              fg='white',
                              relief='flat',
-                             padx=20,
-                             pady=10,
+                             padx=25,
+                             pady=12,
                              cursor='hand2')
-        clear_btn.pack(side=tk.LEFT, padx=(0, 15))
+        clear_btn.pack(side=tk.LEFT, padx=(0, 18))
         
         # Exit button
-        exit_btn = tk.Button(button_frame, text="❌ Exit", 
+        exit_btn = tk.Button(button_frame, text="🌸 Exit", 
                             command=self.root.quit,
-                            font=("Helvetica", 11),
-                            bg='#e74c3c',
+                            font=("Comic Sans MS", 12),
+                            bg='#ffc0cb',
                             fg='white',
                             relief='flat',
-                            padx=20,
-                            pady=10,
+                            padx=25,
+                            pady=12,
                             cursor='hand2')
         exit_btn.pack(side=tk.LEFT)
         
-        # Information section with modern card design
-        info_frame = tk.Frame(main_frame, bg='#ffffff', relief='solid', bd=1, padx=20, pady=20)
+        # Information section with Hello Kitty card design
+        info_frame = tk.Frame(main_frame, bg='#fff0f5', relief='solid', bd=2, padx=25, pady=25)
         info_frame.pack(fill=tk.X, pady=(0, 20))
         
-        info_title = tk.Label(info_frame, text="ℹ️ Information & Tips", 
-                             font=("Helvetica", 14, "bold"),
-                             fg='#2c3e50',
-                             bg='#ffffff')
+        info_title = tk.Label(info_frame, text="🌸 Hello Kitty Tips & Information 🌸", 
+                             font=("Comic Sans MS", 16, "bold"),
+                             fg='#ff69b4',
+                             bg='#fff0f5')
         info_title.pack(anchor=tk.W, pady=(0, 15))
         
-        info_text = """📋 Mode 1: Specify weekly hours and total number of days
-📊 Mode 2: Specify total overall hours (auto-distributed across weeks)
-⏰ Time slots: 30-minute increments between 09:00-18:00
-📅 Daily work: 30-120 minutes per day
-⏱️ Maximum: 15 hours per week
-🎯 All times rounded to 30-minute units for consistency"""
+        info_text = """🎀 Mode 1: Specify weekly hours and total number of days
+🌸 Mode 2: Specify total overall hours (auto-distributed across weeks)
+✨ Time slots: 30-minute increments between 09:00-18:00
+🎀 Daily work: 30-120 minutes per day
+🌸 Maximum: 15 hours per week
+✨ All times rounded to 30-minute units for consistency"""
         
         info_label = tk.Label(info_frame, text=info_text, 
-                             font=("Helvetica", 10),
-                             fg='#7f8c8d',
-                             bg='#ffffff',
+                             font=("Comic Sans MS", 11),
+                             fg='#c71585',
+                             bg='#fff0f5',
                              justify=tk.LEFT,
                              anchor=tk.W)
         info_label.pack(anchor=tk.W)
         
-        # Progress bar with modern styling
-        progress_frame = tk.Frame(main_frame, bg='#f0f8ff')
+        # Progress bar with Hello Kitty styling
+        progress_frame = tk.Frame(main_frame, bg='#ffe6f2')
         progress_frame.pack(fill=tk.X, pady=(0, 15))
         
         self.progress = ttk.Progressbar(progress_frame, 
                                       mode='indeterminate',
                                       style='Custom.Horizontal.TProgressbar',
-                                      length=400)
-        self.progress.pack(pady=10)
+                                      length=450)
+        self.progress.pack(pady=12)
         
-        # Status label with modern styling
-        status_frame = tk.Frame(main_frame, bg='#f0f8ff')
+        # Status label with Hello Kitty styling
+        status_frame = tk.Frame(main_frame, bg='#ffe6f2')
         status_frame.pack(fill=tk.X)
         
-        self.status_var = tk.StringVar(value="✨ Ready to generate your schedule!")
+        self.status_var = tk.StringVar(value="🌸 Ready to create your magical Hello Kitty schedule! 🌸")
         status_label = tk.Label(status_frame, 
                                textvariable=self.status_var, 
-                               font=("Helvetica", 11),
-                               fg='#3498db',
-                               bg='#f0f8ff')
-        status_label.pack(pady=5)
+                               font=("Comic Sans MS", 12),
+                               fg='#ff69b4',
+                               bg='#ffe6f2')
+        status_label.pack(pady=8)
         
         # Initial mode setup
         self.on_mode_change()
@@ -469,7 +474,7 @@ class ScheduleGeneratorGUI:
         
         # Start progress
         self.progress.start()
-        self.status_var.set("🚀 Generating your schedule...")
+        self.status_var.set("🌸 Creating your magical Hello Kitty schedule... 🌸")
         self.root.update()
         
         try:
@@ -512,11 +517,11 @@ class ScheduleGeneratorGUI:
                               f"Files created: {files_text}\n"
                               f"Location: {os.getcwd()}")
             
-            self.status_var.set("✅ Schedule generated successfully!")
+            self.status_var.set("🌸 Hello Kitty schedule created successfully! 🌸")
             
         except Exception as e:
             messagebox.showerror("Error", f"Failed to generate schedule:\n{str(e)}")
-            self.status_var.set("❌ Error occurred during generation")
+            self.status_var.set("🌸 Oops! Something went wrong with the magic... 🌸")
         
         finally:
             self.progress.stop()
@@ -527,11 +532,11 @@ class ScheduleGeneratorGUI:
         self.week_var.set("1")
         self.hours_var.set("10")
         self.days_var.set("7")
-        self.filename_var.set("my_schedule")
+        self.filename_var.set("hello_kitty_schedule")
         self.export_txt.set(True)
         self.export_xlsx.set(True)
         self.export_docx.set(True)
-        self.status_var.set("✨ Ready to generate your schedule!")
+        self.status_var.set("🌸 Ready to create your magical Hello Kitty schedule! 🌸")
 
 def main():
     root = tk.Tk()

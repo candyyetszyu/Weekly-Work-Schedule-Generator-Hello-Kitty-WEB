@@ -182,3 +182,4 @@ This project is open source and available under the MIT License.
 ---
 
 **Happy Scheduling! 🎉** # Weekly-Work-Schedule-Generator
+# Weekly-Work-Schedule-Generator-Hello-Kitty
