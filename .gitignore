@@ -104,6 +104,9 @@ dmypy.json
 *.xlsx
 *.docx
 
+# Background images (keep them in repo)
+# hello_kitty_bg.png
+
 # IDE
 .vscode/
 .idea/

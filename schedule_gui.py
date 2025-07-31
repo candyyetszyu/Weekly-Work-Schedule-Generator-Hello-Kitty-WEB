@@ -8,21 +8,52 @@ from tkinter import ttk, messagebox, filedialog
 from datetime import datetime, timedelta
 import generate_schedule_cli_copy
 import os
+from PIL import Image, ImageTk
 
 class ScheduleGeneratorGUI:
     def __init__(self, root):
         self.root = root
         self.root.title("🎀 Hello Kitty Schedule Generator 🎀")
-        self.root.geometry("750x850")
+        self.root.geometry("850x950")
         self.root.resizable(True, True)
         
         # Set window icon and configure
         self.root.configure(bg='#ffe6f2')  # Light pink background
         
+        # Load and set background image
+        self.setup_background()
+        
         # Configure Hello Kitty style
         self.setup_styles()
         
         self.create_widgets()
+        
+    def setup_background(self):
+        """Setup Hello Kitty background image"""
+        try:
+            # Check if background image exists
+            if os.path.exists('hello_kitty_bg.png'):
+                # Load the background image
+                bg_image = Image.open('hello_kitty_bg.png')
+                # Resize to fit window
+                bg_image = bg_image.resize((850, 950), Image.Resampling.LANCZOS)
+                self.bg_photo = ImageTk.PhotoImage(bg_image)
+                
+                # Create background label
+                self.bg_label = tk.Label(self.root, image=self.bg_photo)
+                self.bg_label.place(x=0, y=0, relwidth=1, relheight=1)
+                self.bg_label.lower()  # Put background behind other widgets
+                
+                print("🌸 Hello Kitty background loaded successfully!")
+            else:
+                print("⚠️ Background image not found, using solid color background")
+                self.bg_photo = None
+                self.bg_label = None
+                
+        except Exception as e:
+            print(f"⚠️ Could not load background image: {e}")
+            self.bg_photo = None
+            self.bg_label = None
         
     def setup_styles(self):
         """Configure Hello Kitty styles for the GUI"""
@@ -55,7 +86,7 @@ class ScheduleGeneratorGUI:
                        foreground='#ff1493',
                        background='#ffe6f2')
         
-        # Frame styles
+        # Frame styles with semi-transparent background
         style.configure('Card.TFrame', 
                        background='#fff0f5',
                        relief='solid',
@@ -83,8 +114,8 @@ class ScheduleGeneratorGUI:
                        troughcolor='#ffe6f2')
         
     def create_widgets(self):
-        # Main frame with Hello Kitty background
-        main_frame = tk.Frame(self.root, bg='#ffe6f2', padx=35, pady=35)
+        # Main frame with transparent background to show Hello Kitty image
+        main_frame = tk.Frame(self.root, bg='#ffe6f2', padx=40, pady=40)  # Same as root background
         main_frame.pack(fill=tk.BOTH, expand=True)
         
         # Title with Hello Kitty styling
@@ -106,19 +137,19 @@ class ScheduleGeneratorGUI:
         subtitle_label.pack(pady=(8, 0))
         
         # Mode selection with Hello Kitty card design
-        mode_frame = tk.Frame(main_frame, bg='#fff0f5', relief='solid', bd=2, padx=25, pady=25)
+        mode_frame = tk.Frame(main_frame, bg='#fff8fa', relief='solid', bd=2, padx=25, pady=25)
         mode_frame.pack(fill=tk.X, pady=(0, 20))
         
         mode_title = tk.Label(mode_frame, text="🎀 Choose Your Magic Mode 🎀", 
                              font=("Comic Sans MS", 16, "bold"),
                              fg='#ff69b4',
-                             bg='#fff0f5')
+                             bg='#fff8fa')
         mode_title.pack(anchor=tk.W, pady=(0, 15))
         
         self.mode_var = tk.StringVar(value="1")
         
         # Mode 1
-        mode1_frame = tk.Frame(mode_frame, bg='#fff0f5')
+        mode1_frame = tk.Frame(mode_frame, bg='#fff8fa')
         mode1_frame.pack(fill=tk.X, pady=8)
         
         mode1_radio = tk.Radiobutton(mode1_frame, 
@@ -128,7 +159,7 @@ class ScheduleGeneratorGUI:
                                    command=self.on_mode_change,
                                    font=("Comic Sans MS", 12),
                                    fg='#ff1493',
-                                   bg='#fff0f5',
+                                   bg='#fff8fa',
                                    selectcolor='#ff69b4')
         mode1_radio.pack(anchor=tk.W)
         
@@ -136,11 +167,11 @@ class ScheduleGeneratorGUI:
                              text="   ✨ Specify weekly hours and total number of days",
                              font=("Comic Sans MS", 10),
                              fg='#c71585',
-                             bg='#fff0f5')
+                             bg='#fff8fa')
         mode1_desc.pack(anchor=tk.W, padx=(25, 0))
         
         # Mode 2
-        mode2_frame = tk.Frame(mode_frame, bg='#fff0f5')
+        mode2_frame = tk.Frame(mode_frame, bg='#fff8fa')
         mode2_frame.pack(fill=tk.X, pady=8)
         
         mode2_radio = tk.Radiobutton(mode2_frame, 
@@ -150,7 +181,7 @@ class ScheduleGeneratorGUI:
                                    command=self.on_mode_change,
                                    font=("Comic Sans MS", 12),
                                    fg='#ff1493',
-                                   bg='#fff0f5',
+                                   bg='#fff8fa',
                                    selectcolor='#ff69b4')
         mode2_radio.pack(anchor=tk.W)
         
@@ -158,28 +189,28 @@ class ScheduleGeneratorGUI:
                              text="   ✨ System will automatically distribute across weeks",
                              font=("Comic Sans MS", 10),
                              fg='#c71585',
-                             bg='#fff0f5')
+                             bg='#fff8fa')
         mode2_desc.pack(anchor=tk.W, padx=(25, 0))
         
         # Input parameters with Hello Kitty card design
-        input_frame = tk.Frame(main_frame, bg='#fff0f5', relief='solid', bd=2, padx=25, pady=25)
+        input_frame = tk.Frame(main_frame, bg='#fff8fa', relief='solid', bd=2, padx=25, pady=25)
         input_frame.pack(fill=tk.X, pady=(0, 20))
         
         input_title = tk.Label(input_frame, text="🌸 Schedule Parameters 🌸", 
                               font=("Comic Sans MS", 16, "bold"),
                               fg='#ff69b4',
-                              bg='#fff0f5')
+                              bg='#fff8fa')
         input_title.pack(anchor=tk.W, pady=(0, 15))
         
         # Create a grid for input fields
-        input_grid = tk.Frame(input_frame, bg='#fff0f5')
+        input_grid = tk.Frame(input_frame, bg='#fff8fa')
         input_grid.pack(fill=tk.X)
         
         # Start date
         tk.Label(input_grid, text="🎀 Start Date (YYYY-MM-DD):", 
                 font=("Comic Sans MS", 12, "bold"),
                 fg='#ff1493',
-                bg='#fff0f5').grid(row=0, column=0, sticky=tk.W, pady=10, padx=(0, 25))
+                bg='#fff8fa').grid(row=0, column=0, sticky=tk.W, pady=10, padx=(0, 25))
         
         self.date_var = tk.StringVar(value=datetime.now().strftime("%Y-%m-%d"))
         self.date_entry = tk.Entry(input_grid, textvariable=self.date_var, 
@@ -194,7 +225,7 @@ class ScheduleGeneratorGUI:
         tk.Label(input_grid, text="🎀 Starting Week Number:", 
                 font=("Comic Sans MS", 12, "bold"),
                 fg='#ff1493',
-                bg='#fff0f5').grid(row=1, column=0, sticky=tk.W, pady=10, padx=(0, 25))
+                bg='#fff8fa').grid(row=1, column=0, sticky=tk.W, pady=10, padx=(0, 25))
         
         self.week_var = tk.StringVar(value="1")
         self.week_entry = tk.Entry(input_grid, textvariable=self.week_var, 
@@ -209,7 +240,7 @@ class ScheduleGeneratorGUI:
         tk.Label(input_grid, text="🌸 Total Hours:", 
                 font=("Comic Sans MS", 12, "bold"),
                 fg='#ff1493',
-                bg='#fff0f5').grid(row=2, column=0, sticky=tk.W, pady=10, padx=(0, 25))
+                bg='#fff8fa').grid(row=2, column=0, sticky=tk.W, pady=10, padx=(0, 25))
         
         self.hours_var = tk.StringVar(value="10")
         self.hours_entry = tk.Entry(input_grid, textvariable=self.hours_var, 
@@ -224,7 +255,7 @@ class ScheduleGeneratorGUI:
         self.days_label = tk.Label(input_grid, text="🎀 Total Days:", 
                                   font=("Comic Sans MS", 12, "bold"),
                                   fg='#ff1493',
-                                  bg='#fff0f5')
+                                  bg='#fff8fa')
         self.days_label.grid(row=3, column=0, sticky=tk.W, pady=10, padx=(0, 25))
         
         self.days_var = tk.StringVar(value="7")
@@ -237,35 +268,35 @@ class ScheduleGeneratorGUI:
         self.days_entry.grid(row=3, column=1, sticky=tk.W, pady=10)
         
         # Output settings with Hello Kitty card design
-        output_frame = tk.Frame(main_frame, bg='#fff0f5', relief='solid', bd=2, padx=25, pady=25)
-        output_frame.pack(fill=tk.X, pady=(0, 20))
+        output_frame = tk.Frame(main_frame, bg='#fff8fa', relief='solid', bd=2, padx=35, pady=35)
+        output_frame.pack(fill=tk.X, pady=(0, 25))
         
         output_title = tk.Label(output_frame, text="🎀 Output Settings 🎀", 
                                font=("Comic Sans MS", 16, "bold"),
                                fg='#ff69b4',
-                               bg='#fff0f5')
-        output_title.pack(anchor=tk.W, pady=(0, 15))
+                               bg='#fff8fa')
+        output_title.pack(anchor=tk.W, pady=(0, 20))
         
         # Filename section
-        filename_section = tk.Frame(output_frame, bg='#fff0f5')
-        filename_section.pack(fill=tk.X, pady=(0, 15))
+        filename_section = tk.Frame(output_frame, bg='#fff8fa')
+        filename_section.pack(fill=tk.X, pady=(0, 20))
         
         tk.Label(filename_section, text="🌸 Output Filename:", 
                 font=("Comic Sans MS", 12, "bold"),
                 fg='#ff1493',
-                bg='#fff0f5').pack(anchor=tk.W, pady=(0, 8))
+                bg='#fff8fa').pack(anchor=tk.W, pady=(0, 12))
         
-        filename_input_frame = tk.Frame(filename_section, bg='#fff0f5')
+        filename_input_frame = tk.Frame(filename_section, bg='#fff8fa')
         filename_input_frame.pack(fill=tk.X)
         
         self.filename_var = tk.StringVar(value="hello_kitty_schedule")
         self.filename_entry = tk.Entry(filename_input_frame, textvariable=self.filename_var, 
                                      font=("Comic Sans MS", 11),
-                                     width=28,
+                                     width=32,
                                      relief='solid',
                                      bd=2,
                                      bg='#fff8fa')
-        self.filename_entry.pack(side=tk.LEFT, padx=(0, 12))
+        self.filename_entry.pack(side=tk.LEFT, padx=(0, 15))
         
         browse_btn = tk.Button(filename_input_frame, text="🎀 Browse", 
                               command=self.browse_location,
@@ -273,20 +304,20 @@ class ScheduleGeneratorGUI:
                               bg='#ffb6c1',
                               fg='white',
                               relief='flat',
-                              padx=18,
-                              pady=6)
+                              padx=20,
+                              pady=8)
         browse_btn.pack(side=tk.LEFT)
         
         # Export options section
-        export_section = tk.Frame(output_frame, bg='#fff0f5')
-        export_section.pack(fill=tk.X)
+        export_section = tk.Frame(output_frame, bg='#fff8fa')
+        export_section.pack(fill=tk.X, pady=(0, 10))
         
         tk.Label(export_section, text="🌸 Export Formats:", 
                 font=("Comic Sans MS", 12, "bold"),
                 fg='#ff1493',
-                bg='#fff0f5').pack(anchor=tk.W, pady=(0, 12))
+                bg='#fff8fa').pack(anchor=tk.W, pady=(0, 15))
         
-        export_options_frame = tk.Frame(export_section, bg='#fff0f5')
+        export_options_frame = tk.Frame(export_section, bg='#fff8fa')
         export_options_frame.pack(fill=tk.X)
         
         self.export_txt = tk.BooleanVar(value=True)
@@ -298,29 +329,29 @@ class ScheduleGeneratorGUI:
                                variable=self.export_txt,
                                font=("Comic Sans MS", 11),
                                fg='#ff1493',
-                               bg='#fff0f5',
+                               bg='#fff8fa',
                                selectcolor='#ff69b4')
-        txt_cb.pack(side=tk.LEFT, padx=(0, 25))
+        txt_cb.pack(side=tk.LEFT, padx=(0, 30))
         
         xlsx_cb = tk.Checkbutton(export_options_frame, text="🎀 Excel (.xlsx)", 
                                 variable=self.export_xlsx,
                                 font=("Comic Sans MS", 11),
                                 fg='#ff1493',
-                                bg='#fff0f5',
+                                bg='#fff8fa',
                                 selectcolor='#ff69b4')
-        xlsx_cb.pack(side=tk.LEFT, padx=(0, 25))
+        xlsx_cb.pack(side=tk.LEFT, padx=(0, 30))
         
         docx_cb = tk.Checkbutton(export_options_frame, text="🌸 Word (.docx)", 
                                 variable=self.export_docx,
                                 font=("Comic Sans MS", 11),
                                 fg='#ff1493',
-                                bg='#fff0f5',
+                                bg='#fff8fa',
                                 selectcolor='#ff69b4')
-        docx_cb.pack(side=tk.LEFT)
+        docx_cb.pack(side=tk.LEFT, padx=(0, 10))
         
         # Action buttons with Hello Kitty styling
         button_frame = tk.Frame(main_frame, bg='#ffe6f2')
-        button_frame.pack(fill=tk.X, pady=(0, 20))
+        button_frame.pack(fill=tk.X, pady=(10, 25))
         
         # Generate button (primary action)
         generate_btn = tk.Button(button_frame, text="🌸 Generate Magic Schedule 🌸", 
@@ -332,7 +363,7 @@ class ScheduleGeneratorGUI:
                                 padx=35,
                                 pady=15,
                                 cursor='hand2')
-        generate_btn.pack(side=tk.LEFT, padx=(0, 18))
+        generate_btn.pack(side=tk.LEFT, padx=(0, 25))
         
         # Clear button
         clear_btn = tk.Button(button_frame, text="🎀 Clear Form", 
@@ -344,7 +375,7 @@ class ScheduleGeneratorGUI:
                              padx=25,
                              pady=12,
                              cursor='hand2')
-        clear_btn.pack(side=tk.LEFT, padx=(0, 18))
+        clear_btn.pack(side=tk.LEFT, padx=(0, 25))
         
         # Exit button
         exit_btn = tk.Button(button_frame, text="🌸 Exit", 
@@ -359,13 +390,13 @@ class ScheduleGeneratorGUI:
         exit_btn.pack(side=tk.LEFT)
         
         # Information section with Hello Kitty card design
-        info_frame = tk.Frame(main_frame, bg='#fff0f5', relief='solid', bd=2, padx=25, pady=25)
+        info_frame = tk.Frame(main_frame, bg='#fff8fa', relief='solid', bd=2, padx=25, pady=25)
         info_frame.pack(fill=tk.X, pady=(0, 20))
         
         info_title = tk.Label(info_frame, text="🌸 Hello Kitty Tips & Information 🌸", 
                              font=("Comic Sans MS", 16, "bold"),
                              fg='#ff69b4',
-                             bg='#fff0f5')
+                             bg='#fff8fa')
         info_title.pack(anchor=tk.W, pady=(0, 15))
         
         info_text = """🎀 Mode 1: Specify weekly hours and total number of days
@@ -378,7 +409,7 @@ class ScheduleGeneratorGUI:
         info_label = tk.Label(info_frame, text=info_text, 
                              font=("Comic Sans MS", 11),
                              fg='#c71585',
-                             bg='#fff0f5',
+                             bg='#fff8fa',
                              justify=tk.LEFT,
                              anchor=tk.W)
         info_label.pack(anchor=tk.W)
