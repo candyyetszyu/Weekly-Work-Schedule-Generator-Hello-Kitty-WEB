@@ -298,6 +298,11 @@ def main():
             help="Mode 1: Set weekly hours and days. Mode 2: Set total hours (auto-distributed)"
         )
         
+        # Initialize variables to avoid UnboundLocalError
+        total_hours = 0
+        total_days = 0
+        total_overall_hours = 0
+        
         # Schedule parameters in a more organized layout
         st.markdown("""
         <div class="card">
@@ -392,7 +397,7 @@ def main():
         
         with col_generate:
             if st.button("🌸 Generate Magic Schedule 🌸", use_container_width=True, type="primary"):
-                generate_schedule_web()
+                generate_schedule_web(filename, mode, total_hours, total_days, total_overall_hours, start_date, start_week, export_txt, export_xlsx, export_docx)
         
         with col_clear:
             if st.button("🎀 Clear Form", use_container_width=True, key="clear"):
@@ -408,11 +413,50 @@ def main():
             <h3 style="color: #ff69b4; font-family: 'Comic Sans MS', cursive; text-align: center;">
                 📊 Schedule Preview
             </h3>
-            <p style="text-align: center; color: #c71585;">
-                Generate a schedule first to see the preview here! 🌸
-            </p>
         </div>
         """, unsafe_allow_html=True)
+        
+        # Check if schedule has been generated
+        if 'schedule_generated' not in st.session_state:
+            st.markdown("""
+            <div class="card">
+                <p style="text-align: center; color: #c71585;">
+                    Generate a schedule first to see the preview here! 🌸
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
+        else:
+            # Show the generated schedule preview
+            filename = st.session_state.get('last_filename', '')
+            
+            # Text file preview
+            if os.path.exists(f"{filename}.txt"):
+                st.markdown("### 📄 Text Schedule Preview")
+                with open(f"{filename}.txt", "r") as f:
+                    schedule_text = f.read()
+                    st.text_area("Schedule Content", schedule_text, height=400, disabled=True)
+            
+            # Excel file preview
+            if os.path.exists(f"{filename}.xlsx"):
+                st.markdown("### 📊 Excel Schedule Preview")
+                try:
+                    df = pd.read_excel(f"{filename}.xlsx")
+                    st.dataframe(df, use_container_width=True)
+                except Exception as e:
+                    st.error(f"Could not load Excel preview: {str(e)}")
+            
+            # Word file preview (show as text since we can't preview .docx directly)
+            if os.path.exists(f"{filename}.docx"):
+                st.markdown("### 📝 Word Document Created")
+                st.info("📄 Word document has been created and saved to your local directory.")
+            
+            # Clear preview button
+            if st.button("🎀 Clear Preview", key="clear_preview"):
+                if 'schedule_generated' in st.session_state:
+                    del st.session_state['schedule_generated']
+                if 'last_filename' in st.session_state:
+                    del st.session_state['last_filename']
+                st.rerun()
     
     with tab3:
         st.markdown("""
@@ -442,100 +486,72 @@ def main():
         **Repository**: [Weekly-Work-Schedule-Generator-Hello-Kitty-WEB](https://github.com/candyyetszyu/Weekly-Work-Schedule-Generator-Hello-Kitty-WEB)
         """)
     
-    # Function to generate schedule
-    def generate_schedule_web():
-        try:
-            # Validate inputs
-            if not filename.strip():
-                st.error("Please enter a filename")
+# Function to generate schedule
+def generate_schedule_web(filename, mode, total_hours, total_days, total_overall_hours, start_date, start_week, export_txt, export_xlsx, export_docx):
+    try:
+        # Validate inputs
+        if not filename.strip():
+            st.error("Please enter a filename")
+            return
+        
+        if "weekly" in mode:
+            if total_hours <= 0 or total_hours > 15:
+                st.error("Weekly hours must be between 0.5 and 15")
                 return
+            if total_days < 1:
+                st.error("Total days must be at least 1")
+                return
+        else:
+            if total_overall_hours <= 0:
+                st.error("Total overall hours must be greater than 0")
+                return
+        
+        # Show progress with better styling
+        with st.spinner("🌸 Creating your magical Hello Kitty schedule... 🌸"):
+            start_date_str = start_date.strftime("%Y-%m-%d")
             
             if "weekly" in mode:
-                if total_hours <= 0 or total_hours > 15:
-                    st.error("Weekly hours must be between 0.5 and 15")
-                    return
-                if total_days < 1:
-                    st.error("Total days must be at least 1")
-                    return
+                # Mode 1
+                generate_schedule_cli_copy.generate_schedule(
+                    start_date_str, total_hours, int(total_days), filename.strip(), start_week,
+                    export_txt, export_xlsx, export_docx
+                )
             else:
-                if total_overall_hours <= 0:
-                    st.error("Total overall hours must be greater than 0")
-                    return
-            
-            # Show progress with better styling
-            with st.spinner("🌸 Creating your magical Hello Kitty schedule... 🌸"):
-                start_date_str = start_date.strftime("%Y-%m-%d")
+                # Mode 2
+                generate_schedule_cli_copy.generate_schedule_total_hours(
+                    start_date_str, total_overall_hours, filename.strip(), start_week,
+                    export_txt, export_xlsx, export_docx
+                )
+        
+        # Check which files were created (but don't show download buttons)
+        created_files = []
+        
+        if export_txt and os.path.exists(f"{filename.strip()}.txt"):
+            created_files.append(".txt")
+        
+        if export_xlsx and os.path.exists(f"{filename.strip()}.xlsx"):
+            created_files.append(".xlsx")
+        
+        if export_docx and os.path.exists(f"{filename.strip()}.docx"):
+            created_files.append(".docx")
+        
+        # Success message with better styling
+        files_text = ", ".join(created_files) if created_files else "No files"
+        st.success(f"""
+        🌸 **Hello Kitty schedule created successfully!** 🌸
+        
+        **Files created:** {files_text}
+        **Location:** {os.getcwd()}
+        
+        📊 **Check the Preview tab to see your schedule!** 🌸
+        """)
+        
+        # Set session state to indicate schedule has been generated
+        st.session_state['schedule_generated'] = True
+        st.session_state['last_filename'] = filename.strip()
                 
-                if "weekly" in mode:
-                    # Mode 1
-                    generate_schedule_cli_copy.generate_schedule(
-                        start_date_str, total_hours, int(total_days), filename.strip(), start_week,
-                        export_txt, export_xlsx, export_docx
-                    )
-                else:
-                    # Mode 2
-                    generate_schedule_cli_copy.generate_schedule_total_hours(
-                        start_date_str, total_overall_hours, filename.strip(), start_week,
-                        export_txt, export_xlsx, export_docx
-                    )
-            
-            # Check which files were created and provide download links
-            created_files = []
-            
-            if export_txt and os.path.exists(f"{filename.strip()}.txt"):
-                created_files.append(".txt")
-                with open(f"{filename.strip()}.txt", "r") as f:
-                    txt_content = f.read()
-                    st.download_button(
-                        label="📄 Download Text File",
-                        data=txt_content,
-                        file_name=f"{filename.strip()}.txt",
-                        mime="text/plain"
-                    )
-            
-            if export_xlsx and os.path.exists(f"{filename.strip()}.xlsx"):
-                created_files.append(".xlsx")
-                with open(f"{filename.strip()}.xlsx", "rb") as f:
-                    st.download_button(
-                        label="📊 Download Excel File",
-                        data=f.read(),
-                        file_name=f"{filename.strip()}.xlsx",
-                        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                    )
-            
-            if export_docx and os.path.exists(f"{filename.strip()}.docx"):
-                created_files.append(".docx")
-                with open(f"{filename.strip()}.docx", "rb") as f:
-                    st.download_button(
-                        label="📝 Download Word File",
-                        data=f.read(),
-                        file_name=f"{filename.strip()}.docx",
-                        mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-                    )
-            
-            # Success message with better styling
-            files_text = ", ".join(created_files) if created_files else "No files"
-            st.success(f"""
-            🌸 **Hello Kitty schedule created successfully!** 🌸
-            
-            **Files created:** {files_text}
-            **Location:** {os.getcwd()}
-            """)
-            
-            # Display preview in the Preview tab
-            if export_txt and os.path.exists(f"{filename.strip()}.txt"):
-                with st.expander("📄 Preview Schedule", expanded=True):
-                    with open(f"{filename.strip()}.txt", "r") as f:
-                        st.text(f.read())
-            
-            # Display Excel preview if created
-            if export_xlsx and os.path.exists(f"{filename.strip()}.xlsx"):
-                with st.expander("📊 Preview Excel Data", expanded=False):
-                    df = pd.read_excel(f"{filename.strip()}.xlsx")
-                    st.dataframe(df, use_container_width=True)
-                    
-        except Exception as e:
-            st.error(f"🌸 Oops! Something went wrong with the magic... 🌸\n\n**Error:** {str(e)}")
+    except Exception as e:
+        st.error(f"🌸 Oops! Something went wrong with the magic... 🌸\n\n**Error:** {str(e)}")
 
 if __name__ == "__main__":
     main() 
