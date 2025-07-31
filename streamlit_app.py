@@ -20,14 +20,25 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for smaller cards and wider sidebar
+# Custom CSS for Hello Kitty theme with improved UX
 st.markdown("""
 <style>
-    /* Make sidebar wider */
+    /* Make sidebar wider and collapsible */
     section[data-testid="stSidebar"] {
         min-width: 350px !important;
         max-width: 400px !important;
     }
+    
+    /* Main container styling */
+    .main-header {
+        background: linear-gradient(135deg, #ffe6f2 0%, #fff0f5 50%, #ffe6f2 100%);
+        padding: 1.5rem 1rem;
+        border-radius: 15px;
+        border: 3px solid #ff69b4;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 6px 24px rgba(255, 105, 180, 0.2);
+    }
+    
     /* Smaller card styling */
     .card {
         background: linear-gradient(135deg, #fff8fa 0%, #fff0f5 100%);
@@ -36,12 +47,20 @@ st.markdown("""
         border: 2px solid #ffb6c1;
         margin-bottom: 1rem;
         box-shadow: 0 2px 8px rgba(255, 182, 193, 0.10);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
         font-size: 1rem;
     }
+    
+    .card:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(255, 182, 193, 0.20);
+    }
+    
     .card h3 {
         margin-bottom: 0.5rem;
         font-size: 1.15rem;
     }
+    
     /* Sidebar tips styling */
     .kitty-tips-list {
         color: #c71585;
@@ -51,9 +70,160 @@ st.markdown("""
         margin-left: 0.5rem;
         margin-bottom: 0.5rem;
     }
+    
     .kitty-tips-list li {
         margin-bottom: 0.3rem;
     }
+    
+    .success-message {
+        background: linear-gradient(135deg, #e8f5e8 0%, #f0fff0 100%);
+        padding: 1rem;
+        border-radius: 10px;
+        border: 2px solid #90ee90;
+        margin: 1rem 0;
+        box-shadow: 0 2px 8px rgba(144, 238, 144, 0.2);
+    }
+    
+    .error-message {
+        background: linear-gradient(135deg, #ffe6e6 0%, #fff0f0 100%);
+        padding: 1rem;
+        border-radius: 10px;
+        border: 2px solid #ff6b6b;
+        margin: 1rem 0;
+        box-shadow: 0 2px 8px rgba(255, 107, 107, 0.2);
+    }
+    
+    /* Button styling */
+    .stButton > button {
+        background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+        color: white;
+        border: none;
+        border-radius: 20px;
+        padding: 0.6rem 1.5rem;
+        font-weight: bold;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 3px 12px rgba(255, 20, 147, 0.3);
+    }
+    
+    .stButton > button:hover {
+        background: linear-gradient(135deg, #dc143c 0%, #ff1493 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 20, 147, 0.4);
+    }
+    
+    .secondary-button {
+        background: linear-gradient(135deg, #98fb98 0%, #90ee90 100%) !important;
+        color: #006400 !important;
+    }
+    
+    .secondary-button:hover {
+        background: linear-gradient(135deg, #90ee90 0%, #7cfc00 100%) !important;
+    }
+    
+    .exit-button {
+        background: linear-gradient(135deg, #87ceeb 0%, #87cefa 100%) !important;
+        color: #000080 !important;
+    }
+    
+    .exit-button:hover {
+        background: linear-gradient(135deg, #87cefa 0%, #00bfff 100%) !important;
+    }
+    
+    /* Form styling */
+    .stTextInput > div > div > input {
+        border-radius: 8px;
+        border: 2px solid #ffb6c1;
+        padding: 0.4rem;
+    }
+    
+    .stNumberInput > div > div > input {
+        border-radius: 8px;
+        border: 2px solid #ffb6c1;
+        padding: 0.4rem;
+    }
+    
+    .stDateInput > div > div > input {
+        border-radius: 8px;
+        border: 2px solid #ffb6c1;
+        padding: 0.4rem;
+    }
+    
+    /* Radio button styling */
+    .stRadio > div > div > label {
+        background: linear-gradient(135deg, #fff8fa 0%, #ffe6f2 100%);
+        border: 2px solid #ffb6c1;
+        border-radius: 8px;
+        padding: 0.6rem;
+        margin: 0.2rem 0;
+        transition: all 0.2s ease;
+    }
+    
+    .stRadio > div > div > label:hover {
+        background: linear-gradient(135deg, #ffe6f2 0%, #ffb6c1 100%);
+        transform: translateX(3px);
+    }
+    
+    /* Checkbox styling */
+    .stCheckbox > div > div > label {
+        background: linear-gradient(135deg, #fff8fa 0%, #ffe6f2 100%);
+        border: 2px solid #ffb6c1;
+        border-radius: 6px;
+        padding: 0.4rem;
+        margin: 0.2rem 0;
+        transition: all 0.2s ease;
+    }
+    
+    .stCheckbox > div > div > label:hover {
+        background: linear-gradient(135deg, #ffe6f2 0%, #ffb6c1 100%);
+    }
+    
+    /* Download button styling */
+    .stDownloadButton > button {
+        background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+        color: white;
+        border: none;
+        border-radius: 15px;
+        padding: 0.4rem 1.2rem;
+        font-weight: bold;
+        margin: 0.4rem 0;
+        transition: all 0.3s ease;
+        box-shadow: 0 3px 12px rgba(255, 105, 180, 0.3);
+    }
+    
+    .stDownloadButton > button:hover {
+        background: linear-gradient(135deg, #ff1493 0%, #dc143c 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 16px rgba(255, 105, 180, 0.4);
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .main-header {
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .card {
+            padding: 0.6rem 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .stButton > button {
+            padding: 0.4rem 1.2rem;
+            font-size: 0.9rem;
+        }
+        
+        section[data-testid="stSidebar"] {
+            min-width: 280px !important;
+            max-width: 320px !important;
+        }
+    }
+    
+    /* Hide Streamlit default elements */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
 </style>
 """, unsafe_allow_html=True)
 
@@ -74,15 +244,15 @@ def main():
     with st.sidebar:
         st.markdown("""
         <div class="card">
-            <h3 style="color: #ff69b4; font-family: 'Comic Sans MS', cursive; text-align: center; margin-bottom: 1rem;">
+            <h3 style="color: #ff69b4; font-family: 'Comic Sans MS', cursive; text-align: center;">
                 🌸 Hello Kitty Tips 🌸
             </h3>
-            <ul style="color: #c71585; font-family: 'Comic Sans MS', cursive; line-height: 1.6;">
-                <li><strong>Mode 1:</strong> Specify weekly hours and total days</li>
-                <li><strong>Mode 2:</strong> Specify total overall hours (auto-distributed)</li>
-                <li><strong>Time slots:</strong> 30-minute increments between 09:00-18:00</li>
-                <li><strong>Daily work:</strong> 30-120 minutes per day</li>
-                <li><strong>Maximum:</strong> 15 hours per week</li>
+            <ul class="kitty-tips-list">
+                <li><b>Mode 1:</b> Specify weekly hours and total days</li>
+                <li><b>Mode 2:</b> Specify total overall hours (auto-distributed)</li>
+                <li><b>Time slots:</b> 30-minute increments between 09:00-18:00</li>
+                <li><b>Daily work:</b> 30-120 minutes per day</li>
+                <li><b>Maximum:</b> 15 hours per week</li>
             </ul>
         </div>
         """, unsafe_allow_html=True)
